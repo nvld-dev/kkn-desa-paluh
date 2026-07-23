@@ -1,7 +1,7 @@
 "use client";
 
-import Avatar from "@/components/ui/Avatar";
-import Badge from "@/components/ui/Badge";
+import Image from "next/image";
+
 import Card from "@/components/ui/Card";
 import { cn } from "@/lib/cn";
 import type { Member } from "@/types/member";
@@ -22,36 +22,32 @@ export default function CommitteeCard({
   return (
     <Card
       variant="glass"
-      padding="md"
+      padding="none"
+      onClick={onClick}
       className={cn(
-        "group w-72 cursor-pointer select-none",
+        "group w-56 cursor-pointer overflow-hidden rounded-2xl select-none",
         "transition-all duration-300",
+        "border border-white/10",
+        "hover:-translate-y-1 hover:border-blue-400/40",
         active && "ring-2 ring-blue-500",
         className,
       )}
-      onClick={onClick}
     >
-      <div className="flex flex-col items-center text-center">
-        <Avatar
+      {/* Photo */}
+      <div className="relative aspect-[4/5] overflow-hidden bg-slate-900">
+        <Image
           src={member.photo}
           alt={member.name}
-          size="lg"
-          className="transition-transform duration-300 group-hover:scale-105"
+          fill
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
+      </div>
 
-        <h3 className="mt-5 text-xl font-bold text-white">{member.name}</h3>
-
-        <p className="mt-1 text-sm text-slate-400">{member.role}</p>
-
-        <div className="mt-4">
-          <Badge variant="primary">{member.division}</Badge>
-        </div>
-
-        {member.motto && (
-          <p className="mt-5 text-sm leading-6 text-slate-400 italic">
-            "{member.motto}"
-          </p>
-        )}
+      {/* Name Plate */}
+      <div className="border-t border-white/10 bg-slate-950/80 px-4 py-3 backdrop-blur">
+        <h3 className="truncate text-center text-base font-semibold text-white">
+          {member.name}
+        </h3>
       </div>
     </Card>
   );

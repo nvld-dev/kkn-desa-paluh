@@ -6,6 +6,7 @@ import gsap from "gsap";
 import { Flip } from "gsap/Flip";
 
 import { ANIMATION } from "@/constants/animation";
+import type { Member } from "@/types/member";
 
 gsap.registerPlugin(Flip, useGSAP);
 
@@ -16,29 +17,12 @@ interface HeroRefs {
   buttonRef: RefObject<HTMLDivElement | null>;
 }
 
-/** Divisions in the order they get spotlighted, per the PRD timeline. */
-const DIVISION_ORDER = [
-  "Ketua",
-  "Sekretaris",
-  "Bendahara",
-  "Humas",
-  "Kominfo",
-  "Acara",
-] as const;
-
-/** Horizontal spread (px) applied to each card when a division has more than one member. */
-const GROUP_OFFSETS: Record<number, number[]> = {
-  1: [0],
-  2: [-190, 190],
-  3: [-320, 0, 320],
-};
-
-/** How large a division's cards appear during their spotlight moment. */
-const SPOTLIGHT_SCALE: Record<number, number> = {
-  1: 1.4,
-  2: 1.1,
-  3: 0.9,
-};
+interface FormationAnimationOptions extends HeroRefs {
+  /** Members in the order they should be spotlighted (one at a time). */
+  members: Member[];
+  /** Setter that swaps which member the <Spotlight /> component displays. */
+  setSpotlightMember: (member: Member | null) => void;
+}
 
 const wait = (seconds: number) =>
   new Promise<void>((resolve) => {
@@ -50,9 +34,22 @@ const tweenToPromise = (tween: gsap.core.Tween) =>
     tween.eventCallback("onComplete", resolve);
   });
 
+/** Waits a frame so a React state update (new photo/name) is painted before we animate it. */
+const nextFrame = () =>
+  new Promise<void>((resolve) => {
+    requestAnimationFrame(() => resolve());
+  });
+
 export function useFormationAnimation(
   containerRef: RefObject<HTMLElement | null>,
-  { badgeRef, titleRef, descriptionRef, buttonRef }: HeroRefs,
+  {
+    badgeRef,
+    titleRef,
+    descriptionRef,
+    buttonRef,
+    members,
+    setSpotlightMember,
+  }: FormationAnimationOptions,
 ) {
   useGSAP(
     () => {
@@ -71,14 +68,34 @@ export function useFormationAnimation(
         buttonRef.current,
       ];
 
-      const getDivisionCards = (division: string) =>
-        gsap.utils.toArray<HTMLElement>(
-          `[data-division="${division}"] [data-card]`,
-          containerRef.current,
+      const getGridCard = (memberId: number) =>
+        containerRef.current!.querySelector<HTMLElement>(
+          `[data-member-id="${memberId}"] [data-card]`,
         );
 
-      const allCards = DIVISION_ORDER.flatMap((division) =>
-        getDivisionCards(division),
+      const getSpotlightPhoto = () =>
+        containerRef.current!.querySelector<HTMLElement>(
+          "[data-spotlight-photo]",
+        );
+
+      const getSpotlightInfo = () =>
+        containerRef.current!.querySelector<HTMLElement>(
+          "[data-spotlight-info]",
+        );
+
+      const allCards = members
+        .map((member) => getGridCard(member.id))
+        .filter((el): el is HTMLElement => Boolean(el));
+
+      // How many members share each division, so a division's total
+      // spotlight duration (ANIMATION.duration.spotlight) can be split
+      // evenly across the individuals in it.
+      const divisionCounts = members.reduce<Record<string, number>>(
+        (acc, member) => {
+          acc[member.division] = (acc[member.division] ?? 0) + 1;
+          return acc;
+        },
+        {},
       );
 
       /* -------------------------------- */
@@ -98,6 +115,8 @@ export function useFormationAnimation(
           filter: "blur(0px)",
         });
 
+        setSpotlightMember(null);
+
         return;
       }
 
@@ -107,8 +126,10 @@ export function useFormationAnimation(
 
       gsap.set(heroElements, { opacity: 0, y: 40 });
 
-      // Every card stays invisible at its grid slot until its division's turn.
+      // Every grid card stays invisible at its slot until its turn in the spotlight.
       gsap.set(allCards, { opacity: 0 });
+
+      setSpotlightMember(null);
 
       /* -------------------------------- */
       /* Hero Intro                       */
@@ -134,84 +155,80 @@ export function useFormationAnimation(
       );
 
       /* -------------------------------- */
-      /* Spotlight → Formation, per division */
+      /* Spotlight → Grid, one member at a time */
       /* -------------------------------- */
 
-      const spotlightDivision = async (division: string) => {
-        const cards = getDivisionCards(division);
+      const spotlightThenSettle = async (member: Member) => {
+        if (cancelled) return;
 
-        if (!cards.length || cancelled) return;
+        const gridCard = getGridCard(member.id);
+        if (!gridCard) return;
 
-        const spotlightScale =
-          SPOTLIGHT_SCALE[cards.length] ??
-          SPOTLIGHT_SCALE[Object.keys(SPOTLIGHT_SCALE).length];
-        const offsets = GROUP_OFFSETS[cards.length] ?? cards.map(() => 0);
+        // 1. Swap the <Spotlight /> component to this member and wait a
+        //    frame so the new photo/name/role are actually painted.
+        setSpotlightMember(member);
+        await nextFrame();
 
-        // 1. Pull the cards out of the grid flow and stage them, centered
-        //    and oversized, on top of everything else.
-        gsap.set(cards, {
-          position: "fixed",
-          top: "50%",
-          left: "50%",
-          xPercent: -50,
-          yPercent: -50,
-          x: (i: number) => offsets[i] ?? 0,
-          y: 40,
-          scale: 0,
-          opacity: 0,
-          rotation: -8,
-          filter: "blur(10px)",
-          zIndex: 50,
-          transformOrigin: "center center",
-        });
+        if (cancelled) return;
 
-        // 2. Reveal: scale/blur/fade in as the spotlight moment.
+        const photoEl = getSpotlightPhoto();
+        const infoEl = getSpotlightInfo();
+        if (!photoEl || !infoEl) return;
+
+        // 2. Entrance: photo scales/fades in, info text follows just after.
+        gsap.set(photoEl, { opacity: 0, scale: 0.85, y: 30 });
+        gsap.set(infoEl, { opacity: 0, x: 40 });
+
         await tweenToPromise(
-          gsap.to(cards, {
-            opacity: 1,
-            scale: spotlightScale,
-            y: 0,
-            rotation: 0,
-            filter: "blur(0px)",
-            duration: 0.7,
-            stagger: 0.12,
-            ease: "back.out(1.6)",
-          }),
+          gsap
+            .timeline()
+            .to(photoEl, {
+              opacity: 1,
+              scale: 1,
+              y: 0,
+              duration: 0.6,
+              ease: "power3.out",
+            })
+            .to(
+              infoEl,
+              { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" },
+              "-=0.35",
+            ) as unknown as gsap.core.Tween,
         );
 
         if (cancelled) return;
 
-        // 3. Hold the spotlight for this division's duration.
-        const holdDuration =
-          ANIMATION.duration.spotlight[
-            division.toLowerCase() as keyof typeof ANIMATION.duration.spotlight
-          ] ?? 1.8;
+        // 3. Hold — this member's share of their division's total spotlight time.
+        const divisionKey =
+          member.division.toLowerCase() as keyof typeof ANIMATION.duration.spotlight;
+        const totalDivisionDuration =
+          ANIMATION.duration.spotlight[divisionKey] ?? 1.8;
+        const memberCount = divisionCounts[member.division] ?? 1;
+        const holdDuration = totalDivisionDuration / memberCount;
 
-        await wait(holdDuration - 0.7 > 0 ? holdDuration - 0.7 : holdDuration);
+        await wait(Math.max(holdDuration - 0.6, 0.4));
 
         if (cancelled) return;
 
-        // 4. Capture the current (fixed, oversized, centered) rects...
-        const flipState = Flip.getState(cards);
+        // 4. Hand off to the grid: instantly make the grid card match the
+        //    spotlight photo's exact screen rect (so nothing visibly
+        //    jumps), reveal it, and hide the spotlight overlay...
+        Flip.fit(gridCard, photoEl, { scale: true });
+        gsap.set(gridCard, { opacity: 1 });
+        gsap.set([photoEl, infoEl], { opacity: 0 });
 
-        // ...then drop the fixed/oversized overrides so the cards fall
-        //    back to their natural resting spot: the grid slot.
-        cards.forEach((el) => {
-          gsap.set(el, {
-            clearProps:
-              "position,top,left,xPercent,yPercent,zIndex,x,y,scale,rotation,filter",
-          });
-        });
+        // ...then Flip it smoothly from that rect back down to its
+        //    natural grid slot — the "scale down, move, fill position".
+        const flipState = Flip.getState(gridCard);
 
-        // 5. Flip animates FROM the captured spotlight rect TO the grid
-        //    slot — this is the "scale down, move, fill final position".
+        gsap.set(gridCard, { clearProps: "all" });
+
         await tweenToPromise(
           Flip.from(flipState, {
             duration: 0.9,
             ease: "power3.inOut",
             scale: true,
             absolute: true,
-            stagger: 0.08,
           }) as unknown as gsap.core.Tween,
         );
       };
@@ -219,13 +236,15 @@ export function useFormationAnimation(
       const runSequence = async () => {
         await tweenToPromise(introTl.play() as unknown as gsap.core.Tween);
 
-        for (const division of DIVISION_ORDER) {
+        for (const member of members) {
           if (cancelled) return;
           // eslint-disable-next-line no-await-in-loop
-          await spotlightDivision(division);
+          await spotlightThenSettle(member);
         }
 
         if (cancelled) return;
+
+        setSpotlightMember(null);
 
         /* ---------- Formation Complete ---------- */
 

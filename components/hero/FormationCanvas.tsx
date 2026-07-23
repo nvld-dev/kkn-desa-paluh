@@ -67,6 +67,7 @@ export default function FormationCanvas({
           <div
             data-card
             className="origin-center will-change-[opacity,transform]"
+            style={{ opacity: 0 }}
           >
             <CommitteeCard
               member={member}
