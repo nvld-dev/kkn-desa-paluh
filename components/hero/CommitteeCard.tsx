@@ -34,7 +34,10 @@ export default function CommitteeCard({
       )}
     >
       {/* Photo */}
-      <div className="relative aspect-[4/5] overflow-hidden bg-slate-900">
+      <div
+        data-card-photo
+        className="relative aspect-[4/5] overflow-hidden bg-slate-900"
+      >
         <Image
           src={member.photo}
           alt={member.name}
