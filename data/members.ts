@@ -23,7 +23,7 @@ export const members: Member[] = [
     name: "Raisa Syifa Nasution",
     role: "Sekretaris",
     division: "Sekretaris",
-    photo: "/images/members/sekretaris-1.jpg",
+    photo: "/images/members/sekretaris1.jpg",
     social: {},
   },
   {
@@ -31,7 +31,7 @@ export const members: Member[] = [
     name: "Raja Andika",
     role: "Sekretaris",
     division: "Sekretaris",
-    photo: "/images/members/sekretaris-2.jpg",
+    photo: "/images/members/sekretaris2.jpg",
     social: {},
   },
 
@@ -55,7 +55,7 @@ export const members: Member[] = [
     name: "Yupi Yani Telaumbanua",
     role: "Humas",
     division: "Humas",
-    photo: "/images/members/humas-1.jpg",
+    photo: "/images/members/humas1.jpg",
     social: {},
   },
   {
@@ -63,7 +63,7 @@ export const members: Member[] = [
     name: "Arsad Ibrahim",
     role: "Humas",
     division: "Humas",
-    photo: "/images/members/humas-2.jpg",
+    photo: "/images/members/humas2.jpg",
     social: {},
   },
 
@@ -75,7 +75,7 @@ export const members: Member[] = [
     name: "Kartika Anggreany Siahaan",
     role: "Kominfo",
     division: "Kominfo",
-    photo: "/images/members/kominfo-1.jpg",
+    photo: "/images/members/kominfo1.jpg",
     social: {},
   },
   {
@@ -83,7 +83,7 @@ export const members: Member[] = [
     name: "Lukmanul Hakim",
     role: "Kominfo",
     division: "Kominfo",
-    photo: "/images/members/kominfo-2.jpg",
+    photo: "/images/members/kominfo2.jpg",
     social: {},
   },
   {
@@ -91,7 +91,7 @@ export const members: Member[] = [
     name: "Gustini Indryani",
     role: "Kominfo",
     division: "Kominfo",
-    photo: "/images/members/kominfo-3.jpg",
+    photo: "/images/members/kominfo3.jpg",
     social: {},
   },
 
@@ -103,15 +103,15 @@ export const members: Member[] = [
     name: "⁠Dian Novita Sari",
     role: "Acara",
     division: "Acara",
-    photo: "/images/members/acara-1.jpg",
+    photo: "/images/members/acara1.jpg",
     social: {},
   },
   {
     id: 11,
-    name: "Lukmanul Hakim",
+    name: "Vijjay Novaldi",
     role: "Acara",
     division: "Acara",
-    photo: "/images/members/acara-2.jpg",
+    photo: "/images/members/acara2.jpg",
     social: {},
   },
 ];

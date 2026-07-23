@@ -45,7 +45,7 @@ export default function CommitteeCard({
       {/* Photo */}
       <div
         data-card-photo
-        className="relative aspect-[4/5] overflow-hidden bg-black"
+        className="relative aspect-[2/3] overflow-hidden bg-black"
       >
         <Image
           src={member.photo}
@@ -54,15 +54,7 @@ export default function CommitteeCard({
           className="object-cover transition-transform duration-700 group-hover:scale-110"
         />
 
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-      </div>
-
-      {/* Name Plate */}
-      <div className="relative border-t border-white/10 bg-black/40 px-4 py-4 backdrop-blur-xl">
-        <h3 className="truncate text-center text-[15px] font-semibold text-white">
-          {member.name}
-        </h3>
+        
       </div>
     </Card>
   );

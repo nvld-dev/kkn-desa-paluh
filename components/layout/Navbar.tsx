@@ -55,8 +55,12 @@ export default function Navbar({ hidden = false }: NavbarProps) {
         >
           {/* Logo */}
           <Link href="/" className="group flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/5 ring-1 ring-white/10 transition group-hover:bg-white/10">
-              <span className="text-lg font-black text-white">K</span>
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/5 ring-1 ring-white/10 transition group-hover:bg-white/10">
+              <img
+                src="/images/logo/logo-kkn.png"
+                alt="Logo KKN"
+                className="object-contain drop-shadow-2xl"
+              />
             </div>
 
             <div>

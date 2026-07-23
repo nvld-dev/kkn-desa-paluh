@@ -59,15 +59,15 @@ export default function Hero({ isIntro, setIsIntro }: HeroProps) {
             className="mb-5 flex items-center justify-center gap-6"
           >
             <img
-              src="/images/logo-universitas.png"
+              src="/images/logo/logo-umri.png"
               alt="Logo Universitas"
-              className="h-24 w-24 object-contain drop-shadow-2xl"
+              className="h-26 w-26 object-contain drop-shadow-2xl"
             />
 
             <div className="h-16 w-px bg-white/15" />
 
             <img
-              src="/images/logo-kkn.png"
+              src="/images/logo/logo-kkn.png"
               alt="Logo KKN"
               className="h-24 w-24 object-contain drop-shadow-2xl"
             />
@@ -89,7 +89,6 @@ export default function Hero({ isIntro, setIsIntro }: HeroProps) {
             className="mt-5 text-5xl font-black tracking-tight text-white lg:text-7xl"
           >
             DESA PALUH
-            
           </h1>
 
           <div ref={buttonRef} className="mt-10 flex justify-center">

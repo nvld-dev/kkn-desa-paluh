@@ -21,7 +21,11 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-4">
               <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/5 ring-1 ring-white/10">
-                <span className="text-xl font-black text-white">K</span>
+                <img
+                  src="/images/logo/logo-kkn.png"
+                  alt="Logo KKN"
+                  className="object-contain drop-shadow-2xl"
+                />
               </div>
 
               <div>
@@ -70,11 +74,11 @@ export default function Footer() {
                 <MapPin className="mt-1 h-5 w-5 text-emerald-400" />
 
                 <div className="text-slate-400">
-                  Desa Paluh
+                  Desa Paluh, kec. Mempura
                   <br />
-                  Kabupaten Deli Serdang
+                  Kabupaten Siak
                   <br />
-                  Sumatera Utara
+                  Riau
                 </div>
               </div>
 
@@ -91,7 +95,7 @@ export default function Footer() {
             © {new Date().getFullYear()} KKN Desa Paluh. All Rights Reserved.
           </p>
 
-          <p>Dibuat dengan ❤️ oleh Tim KKN Desa Paluh.</p>
+          <p>Dibuat Oleh Tim KKN Desa Paluh.</p>
         </div>
       </Container>
     </footer>
