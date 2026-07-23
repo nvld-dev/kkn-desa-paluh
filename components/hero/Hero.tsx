@@ -11,6 +11,7 @@ import Container from "@/components/ui/Container";
 
 import { members } from "@/data/members";
 import { useFormationAnimation } from "@/hooks/useFormationAnimation";
+import SectionTitle from "../ui/SectionTitle";
 
 interface HeroProps {
   isIntro: boolean;
@@ -107,6 +108,12 @@ export default function Hero({ isIntro, setIsIntro }: HeroProps) {
       </Container>
 
       <div className="relative left-1/2 z-10 w-screen -translate-x-1/2 overflow-x-auto">
+        <SectionTitle
+          badge="Organisasi"
+          title="Struktur Kepengurusan"
+          className="mb-10"
+        />
+        
         <FormationCanvas
           members={members}
           selectedId={selectedId}
