@@ -45,7 +45,7 @@ export default function FormationCanvas({
   }, [memberMap]);
 
   return (
-    <div className="relative mx-auto h-[900px] w-full overflow-visible">
+    <div className="relative mx-auto h-[1700px] w-full overflow-visible">
       {items.map(({ member, position }) => (
         <div
           key={member.id}
