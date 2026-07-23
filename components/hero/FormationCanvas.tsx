@@ -45,7 +45,7 @@ export default function FormationCanvas({
   }, [memberMap]);
 
   return (
-    <div className="relative mx-auto h-[1700px] w-full overflow-visible">
+    <div className="relative mx-auto h-[1400px] w-full overflow-visible">
       {items.map(({ member, position }) => (
         <div
           key={member.id}
@@ -54,7 +54,7 @@ export default function FormationCanvas({
             // 144px = half of CommitteeCard's fixed w-72 (288px) width,
             // baked in here since this wrapper can't use a centering
             // transform (see note on data-card's fixed-position spotlight).
-            left: `calc(50% + ${position.x - 144}px)`,
+            left: `calc(50% + ${position.x - 144 + 60}px)`,
             top: `${position.y}px`,
           }}
           data-node

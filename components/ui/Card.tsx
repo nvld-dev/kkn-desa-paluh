@@ -4,32 +4,42 @@ import type { HTMLAttributes } from "react";
 
 const cardVariants = cva(
   [
-    "rounded-2xl",
-    "border",
-    "border-slate-800",
-    "bg-slate-900/70",
-    "backdrop-blur-md",
-    "transition-all",
-    "duration-300",
+    "relative overflow-hidden",
+    "rounded-3xl",
+    "border border-white/10",
+    "bg-white/[0.03]",
+    "backdrop-blur-xl",
+    "transition-all duration-500 ease-out",
   ].join(" "),
   {
     variants: {
       variant: {
-        default: "",
+        default: "shadow-lg shadow-black/20",
 
-        elevated: "shadow-lg shadow-blue-950/20",
+        elevated: "shadow-2xl shadow-black/30",
 
-        glass: "border-white/10 bg-white/5 backdrop-blur-xl",
+        glass: "bg-white/[0.05] border-white/15 backdrop-blur-2xl",
 
-        outline: "bg-transparent",
+        outline: "bg-transparent border-white/10 shadow-none",
       },
 
       hover: {
         true: [
-          "hover:-translate-y-1",
-          "hover:border-blue-500/40",
-          "hover:shadow-xl",
-          "hover:shadow-blue-500/10",
+          "hover:-translate-y-2",
+          "hover:border-white/20",
+          "hover:bg-white/[0.05]",
+          "hover:shadow-2xl",
+          "hover:shadow-black/40",
+          "before:absolute",
+          "before:inset-0",
+          "before:rounded-3xl",
+          "before:bg-gradient-to-br",
+          "before:from-white/[0.05]",
+          "before:to-transparent",
+          "before:opacity-0",
+          "hover:before:opacity-100",
+          "before:transition-opacity",
+          "before:duration-500",
         ].join(" "),
 
         false: "",
@@ -38,11 +48,11 @@ const cardVariants = cva(
       padding: {
         none: "p-0",
 
-        sm: "p-4",
+        sm: "p-5",
 
-        md: "p-6",
+        md: "p-7",
 
-        lg: "p-8",
+        lg: "p-9",
       },
     },
 

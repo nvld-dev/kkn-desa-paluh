@@ -1,20 +1,34 @@
 "use client";
 
 import HeroGlow from "./HeroGlow";
+import HeroParticles from "./HeroParticles";
 
 export default function HeroBackground() {
   return (
     <>
       {/* Base */}
-      <div className="absolute inset-0 -z-30 bg-slate-950" />
+      <div className="absolute inset-0 -z-50 bg-black" />
 
-      {/* Radial */}
-      <div className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_top,#2563eb22_0%,transparent_60%)]" />
+      {/* Aurora */}
+      <div className="absolute inset-0 -z-40 overflow-hidden">
+        {/* Main Glow */}
+        <div className="absolute top-[-24rem] left-1/2 h-[52rem] w-[52rem] -translate-x-1/2 rounded-full bg-emerald-950/70 blur-[220px]" />
 
-      {/* Grid */}
-      <div className="absolute inset-0 -z-20 [background-image:linear-gradient(#ffffff_1px,transparent_1px),linear-gradient(90deg,#ffffff_1px,transparent_1px)] [background-size:40px_40px] opacity-[0.05]" />
+        {/* Left */}
+        <div className="absolute top-[38%] left-[8%] h-[30rem] w-[30rem] rounded-full bg-emerald-900/40 blur-[180px]" />
+
+        {/* Right */}
+        <div className="absolute right-[8%] bottom-[8%] h-[26rem] w-[26rem] rounded-full bg-teal-950/40 blur-[170px]" />
+
+        {/* Accent */}
+        <div className="absolute top-[70%] left-1/2 h-[18rem] w-[18rem] -translate-x-1/2 rounded-full bg-emerald-800/20 blur-[120px]" />
+      </div>
+
+      {/* Vignette */}
+      <div className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(2,6,23,.45)_70%,rgba(2,6,23,.95)_100%)]" />
 
       <HeroGlow />
+      <HeroParticles />
     </>
   );
 }

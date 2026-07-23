@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Mail, MapPin, ArrowUpRight } from "lucide-react";
 
 import Container from "@/components/ui/Container";
 
@@ -13,32 +14,47 @@ const navigation = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-slate-800 bg-slate-950">
+    <footer className="relative border-t border-white/10 bg-black">
       <Container>
-        <div className="grid gap-12 py-16 md:grid-cols-3">
+        <div className="grid gap-14 py-20 md:grid-cols-[1.4fr_1fr_1fr]">
           {/* Brand */}
           <div>
-            <h2 className="text-2xl font-bold text-white">KKN Desa Paluh</h2>
+            <div className="flex items-center gap-4">
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/5 ring-1 ring-white/10">
+                <span className="text-xl font-black text-white">K</span>
+              </div>
 
-            <p className="mt-4 text-sm leading-7 text-slate-400">
-              Website resmi Kelompok Kuliah Kerja Nyata Desa Paluh. Berisi
-              dokumentasi kegiatan, program kerja, artikel, dan profil anggota
-              KKN.
+              <div>
+                <h2 className="text-2xl font-bold text-white">
+                  KKN Desa Paluh
+                </h2>
+
+                <p className="text-sm text-slate-400">
+                  Kuliah Kerja Nyata 2026
+                </p>
+              </div>
+            </div>
+
+            <p className="mt-6 max-w-md leading-8 text-slate-400">
+              Website resmi Kelompok KKN Desa Paluh yang menampilkan dokumentasi
+              kegiatan, program kerja, artikel, dan profil seluruh anggota.
             </p>
           </div>
 
           {/* Navigation */}
           <div>
-            <h3 className="mb-4 text-lg font-semibold text-white">Navigasi</h3>
+            <h3 className="mb-6 text-lg font-semibold text-white">Navigasi</h3>
 
-            <ul className="space-y-3">
+            <ul className="space-y-4">
               {navigation.map((item) => (
                 <li key={item.label}>
                   <Link
                     href={item.href}
-                    className="text-slate-400 transition hover:text-white"
+                    className="group inline-flex items-center gap-2 text-slate-400 transition hover:text-white"
                   >
                     {item.label}
+
+                    <ArrowUpRight className="h-4 w-4 opacity-0 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100" />
                   </Link>
                 </li>
               ))}
@@ -47,22 +63,35 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="mb-4 text-lg font-semibold text-white">Kontak</h3>
+            <h3 className="mb-6 text-lg font-semibold text-white">Kontak</h3>
 
-            <div className="space-y-3 text-slate-400">
-              <p>Desa Paluh</p>
+            <div className="space-y-5">
+              <div className="flex items-start gap-3">
+                <MapPin className="mt-1 h-5 w-5 text-emerald-400" />
 
-              <p>Kabupaten Deli Serdang</p>
+                <div className="text-slate-400">
+                  Desa Paluh
+                  <br />
+                  Kabupaten Deli Serdang
+                  <br />
+                  Sumatera Utara
+                </div>
+              </div>
 
-              <p>Sumatera Utara</p>
-
-              <p>kkn@example.com</p>
+              <div className="flex items-center gap-3 text-slate-400">
+                <Mail className="h-5 w-5 text-emerald-400" />
+                kkn@example.com
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="border-t border-slate-800 py-6 text-center text-sm text-slate-500">
-          © {new Date().getFullYear()} KKN Desa Paluh. All Rights Reserved.
+        <div className="flex flex-col items-center justify-between gap-4 border-t border-white/10 py-8 text-sm text-slate-500 md:flex-row">
+          <p>
+            © {new Date().getFullYear()} KKN Desa Paluh. All Rights Reserved.
+          </p>
+
+          <p>Dibuat dengan ❤️ oleh Tim KKN Desa Paluh.</p>
         </div>
       </Container>
     </footer>

@@ -3,30 +3,33 @@ import { cn } from "@/lib/cn";
 import type { ButtonHTMLAttributes } from "react";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center rounded-xl font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center rounded-2xl font-semibold transition-all duration-300 ease-out focus:outline-none focus:ring-2 disabled:pointer-events-none disabled:opacity-50 active:scale-[0.97]",
   {
     variants: {
       variant: {
-        primary: "bg-blue-600 text-white hover:bg-blue-700 active:scale-95",
+        primary:
+          "bg-gradient-to-r from-emerald-500 via-emerald-600 to-teal-600 text-white shadow-lg shadow-emerald-500/20 hover:-translate-y-1 hover:shadow-xl hover:shadow-emerald-500/30 focus:ring-emerald-400",
 
-        secondary: "bg-slate-800 text-white hover:bg-slate-700 active:scale-95",
+        secondary:
+          "bg-white/5 border border-white/10 backdrop-blur-xl text-white hover:bg-white/10 hover:-translate-y-1 hover:border-white/20",
 
         outline:
-          "border border-slate-600 bg-transparent text-slate-100 hover:bg-slate-800",
+          "border border-white/15 bg-transparent text-white hover:bg-white/5 hover:border-white/25",
 
-        ghost: "bg-transparent text-slate-100 hover:bg-slate-800",
+        ghost: "bg-transparent text-slate-200 hover:bg-white/5",
 
-        danger: "bg-red-600 text-white hover:bg-red-700 active:scale-95",
+        danger:
+          "bg-gradient-to-r from-red-500 to-rose-600 text-white shadow-lg shadow-red-500/20 hover:-translate-y-1 hover:shadow-red-500/30",
       },
 
       size: {
-        sm: "h-9 px-4 text-sm",
+        sm: "h-10 px-5 text-sm",
 
-        md: "h-11 px-6",
+        md: "h-12 px-7",
 
-        lg: "h-14 px-8 text-lg",
+        lg: "h-14 px-9 text-lg",
 
-        icon: "h-11 w-11",
+        icon: "h-12 w-12",
       },
     },
 

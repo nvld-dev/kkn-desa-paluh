@@ -3,11 +3,17 @@
 export default function HeroGlow() {
   return (
     <>
-      <div className="absolute top-24 left-1/2 -z-10 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-blue-600/20 blur-[140px]" />
+      {/* Main Dark Glow */}
+      <div className="absolute top-24 left-1/2 -z-10 h-[560px] w-[560px] -translate-x-1/2 rounded-full bg-black/60 blur-[180px]" />
 
-      <div className="absolute top-1/3 right-0 -z-10 h-80 w-80 rounded-full bg-cyan-500/10 blur-[120px]" />
+      {/* Left Shadow */}
+      <div className="absolute top-1/3 left-[-100px] -z-10 h-[360px] w-[360px] rounded-full bg-black/40 blur-[150px]" />
 
-      <div className="absolute bottom-20 left-0 -z-10 h-72 w-72 rounded-full bg-indigo-500/10 blur-[120px]" />
+      {/* Right Shadow */}
+      <div className="absolute right-[-80px] bottom-20 -z-10 h-[320px] w-[320px] rounded-full bg-black/35 blur-[140px]" />
+
+      {/* Center Soft Glow */}
+      <div className="absolute top-[60%] left-1/2 -z-10 h-[220px] w-[220px] -translate-x-1/2 rounded-full bg-white/[0.02] blur-[90px]" />
     </>
   );
 }

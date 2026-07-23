@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { Dispatch, SetStateAction, useRef, useState } from "react";
 
 import HeroBackground from "@/components/effects/HeroBackground";
 import Spotlight from "@/components/hero/Spotlight";
@@ -12,7 +12,12 @@ import Container from "@/components/ui/Container";
 import { members } from "@/data/members";
 import { useFormationAnimation } from "@/hooks/useFormationAnimation";
 
-export default function Hero() {
+interface HeroProps {
+  isIntro: boolean;
+  setIsIntro: Dispatch<SetStateAction<boolean>>;
+}
+
+export default function Hero({ isIntro, setIsIntro }: HeroProps) {
   const heroRef = useRef<HTMLElement>(null);
 
   const badgeRef = useRef<HTMLDivElement>(null);
@@ -21,6 +26,7 @@ export default function Hero() {
   const buttonRef = useRef<HTMLDivElement>(null);
 
   const [selectedId, setSelectedId] = useState<number>();
+
   const [spotlightMember, setSpotlightMember] = useState<
     (typeof members)[number] | null
   >(null);
@@ -32,6 +38,7 @@ export default function Hero() {
     buttonRef,
     members,
     setSpotlightMember,
+    setIsIntro,
   });
 
   return (
@@ -42,47 +49,71 @@ export default function Hero() {
     >
       <HeroBackground />
 
-      {/* Spotlight */}
-      <Spotlight member={spotlightMember} />
+      <Spotlight member={spotlightMember} visible={isIntro} />
 
       <Container className="relative z-10 flex min-h-screen flex-col justify-center py-24">
-        {/* Hero Text */}
+        <header className="relative z-10 mx-auto mt-20 mb-24 max-w-4xl px-4 text-center">
+          {/* Logo */}
+          <div
+            ref={badgeRef}
+            className="mb-5 flex items-center justify-center gap-6"
+          >
+            <img
+              src="/images/logo-universitas.png"
+              alt="Logo Universitas"
+              className="h-24 w-24 object-contain drop-shadow-2xl"
+            />
 
-        <header className="mx-auto mb-24 max-w-4xl text-center">
-          <div ref={badgeRef}>
-            <Badge size="lg">KKN Desa Paluh</Badge>
+            <div className="h-16 w-px bg-white/15" />
+
+            <img
+              src="/images/logo-kkn.png"
+              alt="Logo KKN"
+              className="h-24 w-24 object-contain drop-shadow-2xl"
+            />
           </div>
 
+          {/* Badge */}
+          <div className="flex justify-center">
+            <Badge
+              size="lg"
+              className="border-white/10 bg-white/5 backdrop-blur-xl"
+            >
+              KKN 2026
+            </Badge>
+          </div>
+
+          {/* Title */}
           <h1
             ref={titleRef}
-            className="mt-6 text-5xl font-black tracking-tight text-white lg:text-7xl"
+            className="mt-5 text-5xl font-black tracking-tight text-white lg:text-7xl"
           >
-            Dynamic Committee
-            <br />
-            Formation
+            DESA PALUH
+            
           </h1>
 
-          <p
-            ref={descriptionRef}
-            className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-400"
-          >
-            Mengenal struktur kepanitiaan KKN Desa Paluh melalui pengalaman
-            interaktif dengan animasi pembentukan organisasi secara dinamis.
-          </p>
-
           <div ref={buttonRef} className="mt-10 flex justify-center">
-            <Button size="lg">Lihat Dokumentasi</Button>
+            <Button
+              size="lg"
+              className={
+                isIntro
+                  ? "pointer-events-none opacity-0"
+                  : "opacity-100 transition-opacity duration-500"
+              }
+            >
+              Lihat Dokumentasi
+            </Button>
           </div>
         </header>
+      </Container>
 
-        {/* Formation */}
-
+      <div className="relative left-1/2 z-10 w-screen -translate-x-1/2 overflow-x-auto">
         <FormationCanvas
           members={members}
           selectedId={selectedId}
           onSelect={setSelectedId}
         />
-      </Container>
+      </div>
     </section>
   );
 }

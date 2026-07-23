@@ -6,7 +6,7 @@ export const members: Member[] = [
   // ==========================
   {
     id: 1,
-    name: "Nama Ketua",
+    name: "⁠Zikri Mulya Sya’ban",
     role: "Ketua",
     division: "Ketua",
     photo: "/images/members/ketua.jpg",
@@ -20,7 +20,7 @@ export const members: Member[] = [
   // ==========================
   {
     id: 2,
-    name: "Nama Sekretaris 1",
+    name: "Raisa Syifa Nasution",
     role: "Sekretaris",
     division: "Sekretaris",
     photo: "/images/members/sekretaris-1.jpg",
@@ -28,7 +28,7 @@ export const members: Member[] = [
   },
   {
     id: 3,
-    name: "Nama Sekretaris 2",
+    name: "Raja Andika",
     role: "Sekretaris",
     division: "Sekretaris",
     photo: "/images/members/sekretaris-2.jpg",
@@ -40,7 +40,7 @@ export const members: Member[] = [
   // ==========================
   {
     id: 4,
-    name: "Nama Bendahara",
+    name: "Melda Novitasari",
     role: "Bendahara",
     division: "Bendahara",
     photo: "/images/members/bendahara.jpg",
@@ -52,7 +52,7 @@ export const members: Member[] = [
   // ==========================
   {
     id: 5,
-    name: "Nama Humas 1",
+    name: "Yupi Yani Telaumbanua",
     role: "Humas",
     division: "Humas",
     photo: "/images/members/humas-1.jpg",
@@ -60,7 +60,7 @@ export const members: Member[] = [
   },
   {
     id: 6,
-    name: "Nama Humas 2",
+    name: "Arsad Ibrahim",
     role: "Humas",
     division: "Humas",
     photo: "/images/members/humas-2.jpg",
@@ -72,7 +72,7 @@ export const members: Member[] = [
   // ==========================
   {
     id: 7,
-    name: "Nama Kominfo 1",
+    name: "Kartika Anggreany Siahaan",
     role: "Kominfo",
     division: "Kominfo",
     photo: "/images/members/kominfo-1.jpg",
@@ -80,7 +80,7 @@ export const members: Member[] = [
   },
   {
     id: 8,
-    name: "Nama Kominfo 2",
+    name: "Lukmanul Hakim",
     role: "Kominfo",
     division: "Kominfo",
     photo: "/images/members/kominfo-2.jpg",
@@ -88,7 +88,7 @@ export const members: Member[] = [
   },
   {
     id: 9,
-    name: "Nama Kominfo 3",
+    name: "Gustini Indryani",
     role: "Kominfo",
     division: "Kominfo",
     photo: "/images/members/kominfo-3.jpg",
@@ -100,7 +100,7 @@ export const members: Member[] = [
   // ==========================
   {
     id: 10,
-    name: "Nama Acara 1",
+    name: "⁠Dian Novita Sari",
     role: "Acara",
     division: "Acara",
     photo: "/images/members/acara-1.jpg",
@@ -108,7 +108,7 @@ export const members: Member[] = [
   },
   {
     id: 11,
-    name: "Nama Acara 2",
+    name: "Lukmanul Hakim",
     role: "Acara",
     division: "Acara",
     photo: "/images/members/acara-2.jpg",

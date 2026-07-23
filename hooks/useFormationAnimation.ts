@@ -18,16 +18,10 @@ interface HeroRefs {
 }
 
 interface FormationAnimationOptions extends HeroRefs {
-  /** Members in the order they should be spotlighted (one at a time). */
   members: Member[];
-  /** Setter that swaps which member the <Spotlight /> component displays. */
   setSpotlightMember: (member: Member | null) => void;
+  setIsIntro: (value: boolean) => void;
 }
-
-const wait = (seconds: number) =>
-  new Promise<void>((resolve) => {
-    gsap.delayedCall(seconds, resolve);
-  });
 
 const tweenToPromise = (tween: gsap.core.Tween) =>
   new Promise<void>((resolve) => {
@@ -49,6 +43,7 @@ export function useFormationAnimation(
     buttonRef,
     members,
     setSpotlightMember,
+    setIsIntro,
   }: FormationAnimationOptions,
 ) {
   useGSAP(
@@ -56,6 +51,22 @@ export function useFormationAnimation(
       if (!containerRef.current) return;
 
       let cancelled = false;
+      let introFinished = false;
+
+      const shouldStop = () => cancelled || introFinished;
+
+      let masterTimeline: gsap.core.Timeline | null = null;
+
+      const delayedCalls: gsap.core.Tween[] = [];
+      let activeFlyingPhoto: HTMLElement | null = null;
+      const wait = (seconds: number) =>
+        new Promise<void>((resolve) => {
+          const call = gsap.delayedCall(seconds, resolve);
+
+          delayedCalls.push(call);
+
+          call.eventCallback("onComplete", resolve);
+        });
 
       /* -------------------------------- */
       /* Hero Elements                    */
@@ -98,6 +109,53 @@ export function useFormationAnimation(
         {},
       );
 
+      const finishIntro = () => {
+        if (introFinished) return;
+
+        introFinished = true;
+
+        delayedCalls.forEach((call) => call.kill());
+
+        masterTimeline?.kill();
+
+        // Hapus clone FLIP jika masih ada
+        activeFlyingPhoto?.remove();
+        activeFlyingPhoto = null;
+
+        setSpotlightMember(null);
+
+        setIsIntro(false);
+
+        gsap.killTweensOf(allCards);
+
+        // Reset semua transform hasil animasi
+        gsap.set(allCards, {
+          clearProps: "transform",
+          opacity: 1,
+          scale: 1,
+        });
+
+        gsap.to(allCards, {
+          y: "+=8",
+          duration: 2.2,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+          stagger: {
+            each: 0.08,
+            from: "random",
+          },
+        });
+      };
+
+      const skipIntro = () => {
+        gsap.set(allCards, {
+          opacity: 1,
+          scale: 1,
+        });
+
+        finishIntro();
+      };
       /* -------------------------------- */
       /* Reduced Motion                   */
       /* -------------------------------- */
@@ -126,6 +184,32 @@ export function useFormationAnimation(
 
       gsap.set(heroElements, { opacity: 0, y: 40 });
 
+      const skipEvents = () => {
+        if (!introFinished) {
+          skipIntro();
+        }
+      };
+
+      window.addEventListener("wheel", skipEvents, {
+        passive: true,
+      });
+
+      window.addEventListener("touchmove", skipEvents, {
+        passive: true,
+      });
+
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (
+          e.code === "Space" ||
+          e.code === "ArrowDown" ||
+          e.code === "PageDown"
+        ) {
+          skipEvents();
+        }
+      };
+
+      window.addEventListener("keydown", handleKeyDown);
+
       // Every grid card stays invisible at its slot until its turn in the spotlight.
       gsap.set(allCards, { opacity: 0 });
 
@@ -135,32 +219,56 @@ export function useFormationAnimation(
       /* Hero Intro                       */
       /* -------------------------------- */
 
-      const introTl = gsap.timeline({ defaults: { ease: "power3.out" } });
+      masterTimeline = gsap.timeline({
+        defaults: {
+          ease: "power3.out",
+        },
+      });
 
-      introTl.to(badgeRef.current, { opacity: 1, y: 0, duration: 0.45 });
-      introTl.to(
+      masterTimeline.to(badgeRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+      });
+
+      masterTimeline.to(
         titleRef.current,
-        { opacity: 1, y: 0, duration: 0.7 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.9,
+        },
         "-=0.15",
       );
-      introTl.to(
+
+      masterTimeline.to(
         descriptionRef.current,
-        { opacity: 1, y: 0, duration: 0.6 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+        },
         "-=0.35",
       );
-      introTl.to(
+
+      masterTimeline.to(
         buttonRef.current,
-        { opacity: 1, y: 0, duration: 0.45 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+        },
         "-=0.25",
       );
+
+      // Hero tetap tampil sekitar 2 detik sebelum Spotlight dimulai
+      masterTimeline.to({}, { duration: 1 });
 
       /* -------------------------------- */
       /* Spotlight → Grid, one member at a time */
       /* -------------------------------- */
 
       const spotlightThenSettle = async (member: Member) => {
-        if (cancelled) return;
-
         const gridCard = getGridCard(member.id);
         if (!gridCard) return;
 
@@ -168,8 +276,7 @@ export function useFormationAnimation(
         //    frame so the new photo/name/role are actually painted.
         setSpotlightMember(member);
         await nextFrame();
-
-        if (cancelled) return;
+        if (shouldStop()) return;
 
         const photoEl = getSpotlightPhoto();
         const infoEl = getSpotlightInfo();
@@ -210,8 +317,7 @@ export function useFormationAnimation(
               "-=0.35",
             ) as unknown as gsap.core.Tween,
         );
-
-        if (cancelled) return;
+        if (shouldStop()) return;
 
         // 3. Hold — this member's share of their division's total spotlight time.
         const divisionKey =
@@ -221,9 +327,8 @@ export function useFormationAnimation(
         const memberCount = divisionCounts[member.division] ?? 1;
         const holdDuration = totalDivisionDuration / memberCount;
 
-        await wait(Math.max(holdDuration - 0.6, 0.4));
-
-        if (cancelled) return;
+        await wait(Math.max(holdDuration + 1));
+        if (shouldStop()) return;
 
         // Fade out info
         await tweenToPromise(
@@ -234,11 +339,23 @@ export function useFormationAnimation(
             ease: "power2.out",
           }),
         );
-
+        if (shouldStop()) return;
         // Clone spotlight photo
         const flyingPhoto = photoEl.cloneNode(true) as HTMLElement;
+
+        activeFlyingPhoto = flyingPhoto;
+
         document.body.appendChild(flyingPhoto);
 
+        if (shouldStop()) {
+          flyingPhoto.remove();
+
+          if (activeFlyingPhoto === flyingPhoto) {
+            activeFlyingPhoto = null;
+          }
+
+          return;
+        }
         const photoRect = photoEl.getBoundingClientRect();
 
         gsap.set(flyingPhoto, {
@@ -263,6 +380,11 @@ export function useFormationAnimation(
 
         if (!photoTarget) {
           flyingPhoto.remove();
+
+          if (activeFlyingPhoto === flyingPhoto) {
+            activeFlyingPhoto = null;
+          }
+
           return;
         }
 
@@ -287,28 +409,43 @@ export function useFormationAnimation(
             duration: 0.9,
             ease: "power3.inOut",
             onComplete: () => {
-              gsap.set(gridCard, {
-                opacity: 1,
-              });
+              if (!shouldStop()) {
+                gsap.set(gridCard, {
+                  opacity: 1,
+                });
+              }
 
               flyingPhoto.remove();
+
+              if (activeFlyingPhoto === flyingPhoto) {
+                activeFlyingPhoto = null;
+              }
             },
           }) as unknown as gsap.core.Tween,
         );
+        if (shouldStop()) {
+          activeFlyingPhoto?.remove();
+          activeFlyingPhoto = null;
+          return;
+        }
       };
 
       const runSequence = async () => {
-        await tweenToPromise(introTl.play() as unknown as gsap.core.Tween);
+        await tweenToPromise(
+          masterTimeline.play() as unknown as gsap.core.Tween,
+        );
+        if (shouldStop()) return;
 
         for (const member of members) {
           if (cancelled) return;
           // eslint-disable-next-line no-await-in-loop
           await spotlightThenSettle(member);
+          if (shouldStop()) return;
         }
 
         if (cancelled) return;
 
-        setSpotlightMember(null);
+        finishIntro();
 
         /* ---------- Formation Complete ---------- */
 
@@ -334,8 +471,16 @@ export function useFormationAnimation(
 
       return () => {
         cancelled = true;
-        introTl.kill();
+
+        masterTimeline?.kill();
+
+        delayedCalls.forEach((call) => call.kill());
+
         gsap.killTweensOf(allCards);
+
+        window.removeEventListener("wheel", skipEvents);
+        window.removeEventListener("touchmove", skipEvents);
+        window.removeEventListener("keydown", handleKeyDown);
       };
     },
     {
