@@ -7,6 +7,7 @@ import Navbar from "@/components/layout/Navbar";
 import ScrollToTop from "@/components/layout/ScrollToTop";
 
 import Hero from "@/components/hero/Hero";
+import AboutSection from "@/components/sections/about/AboutSection";
 
 export default function HomePage() {
   const [isIntro, setIsIntro] = useState(true);
@@ -17,6 +18,7 @@ export default function HomePage() {
 
       <main>
         <Hero isIntro={isIntro} setIsIntro={setIsIntro} />
+        <AboutSection />
       </main>
 
       <Footer />

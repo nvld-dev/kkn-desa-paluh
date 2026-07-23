@@ -22,11 +22,11 @@ export default function HeroBackground() {
 
         {/* Accent */}
         <div className="absolute top-[70%] left-1/2 h-[18rem] w-[18rem] -translate-x-1/2 rounded-full bg-emerald-800/20 blur-[120px]" />
-      </div>
 
+        <div className="absolute bottom-[-24rem] left-1/2 h-[44rem] w-[44rem] -translate-x-1/2 rounded-full bg-emerald-950/55 blur-[200px]" />
+      </div>
       {/* Vignette */}
       <div className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(2,6,23,.45)_70%,rgba(2,6,23,.95)_100%)]" />
-
       <HeroGlow />
       <HeroParticles />
     </>

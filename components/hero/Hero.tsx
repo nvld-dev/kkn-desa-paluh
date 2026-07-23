@@ -46,7 +46,7 @@ export default function Hero({ isIntro, setIsIntro }: HeroProps) {
     <section
       ref={heroRef}
       id="hero"
-      className="relative isolate min-h-screen overflow-hidden bg-slate-950"
+      className="relative isolate min-h-screen overflow-hidden "
     >
       <HeroBackground />
 
@@ -64,34 +64,12 @@ export default function Hero({ isIntro, setIsIntro }: HeroProps) {
               alt="Logo KKN"
               className="h-24 w-24 object-contain drop-shadow-2xl"
             />
-          </div>
 
-          {/* <div
-            ref={badgeRef}
-            className="mb-5 flex items-center justify-center gap-6"
-          >
-            <img
-              src="/images/logo/logo-umri.png"
-              alt="Logo Universitas"
-              className="h-26 w-26 object-contain drop-shadow-2xl"
-            />
-
-            <div className="h-16 w-px bg-white/15" />
-
-            <img
-              src="/images/logo/logo-kkn.png"
-              alt="Logo KKN"
-              className="h-24 w-24 object-contain drop-shadow-2xl"
-            />
-          </div> */}
-
-          {/* Badge */}
-          <div className="flex justify-center">
             <Badge
               size="lg"
               className="border-white/10 bg-white/5 backdrop-blur-xl"
             >
-              KKN 2026
+              KKN UMRI 2026
             </Badge>
           </div>
 
@@ -100,7 +78,7 @@ export default function Hero({ isIntro, setIsIntro }: HeroProps) {
             ref={titleRef}
             className="mt-5 text-5xl font-black tracking-tight text-white lg:text-7xl"
           >
-            KKN 11 PALUH
+            K11 DESA PALUH
           </h1>
 
           <div ref={buttonRef} className="mt-10 flex justify-center">
@@ -133,4 +111,39 @@ export default function Hero({ isIntro, setIsIntro }: HeroProps) {
       </div>
     </section>
   );
+}
+
+{
+  /* <div
+            ref={badgeRef}
+            className="mb-5 flex items-center justify-center gap-6"
+          >
+            <img
+              src="/images/logo/logo-umri.png"
+              alt="Logo Universitas"
+              className="h-26 w-26 object-contain drop-shadow-2xl"
+            />
+
+            <div className="h-16 w-px bg-white/15" />
+
+            <img
+              src="/images/logo/logo-kkn.png"
+              alt="Logo KKN"
+              className="h-24 w-24 object-contain drop-shadow-2xl"
+            />
+          </div> */
+}
+
+{
+  /* Badge */
+}
+{
+  /* <div className="flex justify-center">
+            <Badge
+              size="lg"
+              className="border-white/10 bg-white/5 backdrop-blur-xl"
+            >
+              KKN UMRI 2026
+            </Badge>
+          </div> */
 }

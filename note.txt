@@ -1,43 +1,201 @@
-Roadmap UI Foundation
+Ohh, kalau sudah terlanjur seperti itu **tidak masalah sama sekali**. Justru menurut saya tinggal konsisten saja.
 
-Setelah Container, saya menyarankan urutannya sebagai berikut:
+Yang saya ubah hanya bagian `components/sections`.
 
-✅ Container
-⬜ Button
-⬜ SectionTitle
-⬜ Badge
-⬜ Card
-⬜ Modal
-⬜ Avatar
+Karena nanti akan ada halaman terpisah (`/program-kerja`, `/dokumentasi`, `/artikel`), maka **komponen untuk halaman tersebut jangan disimpan di `sections`**.
 
-Langkah Selanjutnya
+Saya akan buat seperti ini:
 
-Mulai tahap Layout, dengan urutan:
-
-components/layout/
+```text
+components/
+├── effects/
 │
-├── Navbar.tsx
-├── Footer.tsx
-├── MobileMenu.tsx
-└── ScrollToTop.tsx
+├── hero/
+│   ├── Hero.tsx
+│   ├── HeroBackground.tsx
+│   ├── Spotlight.tsx
+│   ├── FormationCanvas.tsx
+│   └── CommitteeCard.tsx
+│
+├── sections/
+│   ├── about/
+│   │   ├── AboutSection.tsx
+│   │   ├── AboutContent.tsx
+│   │   ├── AboutImage.tsx
+│   │   ├── AboutStats.tsx
+│   │   └── AboutChecklist.tsx
+│   │
+│   └── cta/
+│       └── CTASection.tsx
+│
+├── program/
+│
+├── gallery/
+│
+├── article/
+│
+├── layout/
+│
+├── profile/
+│
+└── ui/
+```
 
-components/hero/CommitteeCard.tsx
-components/hero/FormationCanvas.tsx
-components/hero/Hero.tsx
-Integrasi animasi GSAP sesuai timeline pada PRD (anggota muncul satu per satu lalu membentuk formasi). Ini akan membangun fitur utama website sejak awal sehingga section lain tinggal melengkapi pengalaman pengguna.
+Alasannya sederhana.
+
+`sections/` menurut saya sebaiknya hanya berisi **section yang dipakai di Homepage**.
+
+Misalnya:
+
+```
+Hero
+About
+CTA
+```
+
+Sedangkan halaman penuh punya folder sendiri.
+
+---
+
+## Nanti app/
+
+```
+app/
+├── page.tsx
+
+├── program-kerja/
+│   ├── page.tsx
+│   └── [slug]/
+│       └── page.tsx
+
+├── dokumentasi/
+│   ├── page.tsx
+│   └── [slug]/
+│       └── page.tsx
+
+├── artikel/
+│   ├── page.tsx
+│   └── [slug]/
+│       └── page.tsx
+```
+
+---
+
+## Lalu components/
+
+```
+components/
+
+hero/
+    Hero
+
+sections/
+    About
+    CTA
+
+program/
+    ProgramHero.tsx
+    ProgramGrid.tsx
+    ProgramCard.tsx
+    ProgramFilter.tsx
+
+gallery/
+    GalleryHero.tsx
+    GalleryGrid.tsx
+    GalleryCard.tsx
+    GalleryFilter.tsx
+    Lightbox.tsx
+
+article/
+    ArticleHero.tsx
+    ArticleGrid.tsx
+    ArticleCard.tsx
+```
+
+Jadi `app/program-kerja/page.tsx` hanya menggabungkan komponen:
+
+```tsx
+<ProgramHero />
+<ProgramFilter />
+<ProgramGrid />
+```
+
+---
+
+## Untuk `data/` juga saya sarankan mulai dipisah
+
+Sekarang:
+
+```
+data/
+├── members.ts
+└── about.ts
+```
+
+Nanti menjadi:
+
+```
+data/
+├── members.ts
+├── about.ts
+├── programs.ts
+├── gallery.ts
+└── articles.ts
+```
+
+---
+
+## Kesimpulan
+
+Menurut saya struktur ini akan tetap rapi meskipun websitenya berkembang:
+
+```
+components/
+├── hero/          → Hero homepage
+├── sections/      → Section homepage
+├── program/       → Komponen halaman Program Kerja
+├── gallery/       → Komponen halaman Dokumentasi
+├── article/       → Komponen halaman Artikel
+├── layout/
+├── profile/
+└── ui/
+```
+
+Dengan pembagian seperti ini, tanggung jawab setiap folder jelas:
+
+* **`hero/`** → semua komponen yang membangun Hero.
+* **`sections/`** → hanya section yang muncul di homepage.
+* **`program/`, `gallery/`, `article/`** → komponen khusus untuk halaman masing-masing.
+* **`ui/`** → komponen reusable seperti `Button`, `Badge`, `SectionTitle`, `GlassCard`, dan komponen umum lainnya.
 
 
 
-Roadmap saya:
 
-v1 ✅ Initial Animation
-v2 ⬜ Formation Animation
-v3 ⬜ Division Timeline
-v4 ⬜ Idle Animation
-v5 ⬜ Hover Animation
-v6 ⬜ Click + Modal
 
-✅ useFormationAnimation.ts (full, siap copy-paste)
-✅ FormationCanvas.tsx (full)
-✅ Hero.tsx (full)
-✅ CommitteeCard.tsx (jika perlu)
+
+
+
+
+
+
+
+
+
+Tahap 1
+data/about.ts
+Tahap 2
+AboutSection.tsx
+AboutContent.tsx
+AboutImage.tsx
+AboutChecklist.tsx
+AboutStatCard.tsx
+AboutStats.tsx
+Tahap 3
+hooks/useAboutAnimation.ts
+Tahap 4
+Integrasi ke app/page.tsx
+Tahap 5
+Review UI/UX
+Optimasi responsif
+Optimasi animasi GSAP
+Polishing agar visualnya setara dengan Heroh
