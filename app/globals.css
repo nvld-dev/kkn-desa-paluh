@@ -11,3 +11,46 @@ body {
 * {
   box-sizing: border-box;
 }
+
+@keyframes shooting-star {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  96% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(var(--dx), var(--dy), 0);
+    opacity: 0;
+  }
+}
+
+@keyframes star-spark {
+  0% {
+    transform: translate(50%, -50%) scale(0.2);
+    opacity: 0;
+  }
+  25% {
+    transform: translate(50%, -50%) scale(1.4);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(50%, -50%) scale(0.4);
+    opacity: 0;
+  }
+}
+
+.animate-shooting-star {
+  animation: shooting-star var(--dur, 1.4s) linear forwards;
+  animation-duration: inherit;
+  will-change: transform, opacity;
+}
+
+.animate-star-spark {
+  animation: star-spark 0.45s ease-out forwards;
+  will-change: transform, opacity;
+}
