@@ -60,6 +60,17 @@ export default function Hero({ isIntro, setIsIntro }: HeroProps) {
             className="mb-5 flex items-center justify-center gap-6"
           >
             <img
+              src="/images/logo/logo-kkn.png"
+              alt="Logo KKN"
+              className="h-24 w-24 object-contain drop-shadow-2xl"
+            />
+          </div>
+
+          {/* <div
+            ref={badgeRef}
+            className="mb-5 flex items-center justify-center gap-6"
+          >
+            <img
               src="/images/logo/logo-umri.png"
               alt="Logo Universitas"
               className="h-26 w-26 object-contain drop-shadow-2xl"
@@ -72,7 +83,7 @@ export default function Hero({ isIntro, setIsIntro }: HeroProps) {
               alt="Logo KKN"
               className="h-24 w-24 object-contain drop-shadow-2xl"
             />
-          </div>
+          </div> */}
 
           {/* Badge */}
           <div className="flex justify-center">
@@ -89,7 +100,7 @@ export default function Hero({ isIntro, setIsIntro }: HeroProps) {
             ref={titleRef}
             className="mt-5 text-5xl font-black tracking-tight text-white lg:text-7xl"
           >
-            DESA PALUH
+            KKN 11 PALUH
           </h1>
 
           <div ref={buttonRef} className="mt-10 flex justify-center">
@@ -113,7 +124,7 @@ export default function Hero({ isIntro, setIsIntro }: HeroProps) {
           title="Struktur Kepengurusan"
           className="mb-10"
         />
-        
+
         <FormationCanvas
           members={members}
           selectedId={selectedId}

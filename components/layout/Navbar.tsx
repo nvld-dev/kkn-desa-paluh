@@ -10,12 +10,10 @@ import { cn } from "@/lib/cn";
 
 const navItems = [
   { label: "Beranda", href: "#hero" },
-  { label: "Tentang", href: "#about" },
   { label: "Program", href: "#program" },
   { label: "Galeri", href: "#gallery" },
   { label: "Artikel", href: "#article" },
   { label: "Tim", href: "#committee" },
-  { label: "Kontak", href: "#contact" },
 ];
 
 interface NavbarProps {
