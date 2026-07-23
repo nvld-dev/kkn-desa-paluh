@@ -210,27 +210,62 @@ export function useFormationAnimation(
 
         if (cancelled) return;
 
-        // 4. Hand off to the grid: instantly make the grid card match the
-        //    spotlight photo's exact screen rect (so nothing visibly
-        //    jumps), reveal it, and hide the spotlight overlay...
-        Flip.fit(gridCard, photoEl, { scale: true });
-        gsap.set(gridCard, { opacity: 1 });
-        gsap.set([photoEl, infoEl], { opacity: 0 });
+        // Fade out info terlebih dahulu
+        await tweenToPromise(
+          gsap.to(infoEl, {
+            opacity: 0,
+            x: 24,
+            duration: 0.25,
+            ease: "power2.out",
+          }),
+        );
 
-        // ...then Flip it smoothly from that rect back down to its
-        //    natural grid slot — the "scale down, move, fill position".
-        const flipState = Flip.getState(gridCard);
+        // Clone foto spotlight
+        const flyingPhoto = photoEl.cloneNode(true) as HTMLElement;
 
-        gsap.set(gridCard, { clearProps: "all" });
+        document.body.appendChild(flyingPhoto);
+
+        gsap.set(flyingPhoto, {
+          position: "fixed",
+          left: photoEl.getBoundingClientRect().left,
+          top: photoEl.getBoundingClientRect().top,
+          width: photoEl.getBoundingClientRect().width,
+          height: photoEl.getBoundingClientRect().height,
+          margin: 0,
+          zIndex: 9999,
+          pointerEvents: "none",
+        });
+
+        gsap.set(photoEl, {
+          opacity: 0,
+        });
+
+        // Posisi tujuan = area foto pada CommitteeCard
+        const photoTarget = gridCard.querySelector(
+          ".aspect-\\[4\\/5\\]",
+        ) as HTMLElement;
+
+        if (!photoTarget) return;
+
+        const targetRect = photoTarget.getBoundingClientRect();
 
         await tweenToPromise(
-          Flip.from(flipState, {
+          gsap.to(flyingPhoto, {
+            left: targetRect.left,
+            top: targetRect.top,
+            width: targetRect.width,
+            height: targetRect.height,
             duration: 0.9,
             ease: "power3.inOut",
-            scale: true,
-            absolute: true,
-          }) as unknown as gsap.core.Tween,
+          }),
         );
+
+        // Card baru muncul setelah foto sampai
+        gsap.set(gridCard, {
+          opacity: 1,
+        });
+
+        flyingPhoto.remove();
       };
 
       const runSequence = async () => {
