@@ -1,0 +1,43 @@
+Roadmap UI Foundation
+
+Setelah Container, saya menyarankan urutannya sebagai berikut:
+
+✅ Container
+⬜ Button
+⬜ SectionTitle
+⬜ Badge
+⬜ Card
+⬜ Modal
+⬜ Avatar
+
+Langkah Selanjutnya
+
+Mulai tahap Layout, dengan urutan:
+
+components/layout/
+│
+├── Navbar.tsx
+├── Footer.tsx
+├── MobileMenu.tsx
+└── ScrollToTop.tsx
+
+components/hero/CommitteeCard.tsx
+components/hero/FormationCanvas.tsx
+components/hero/Hero.tsx
+Integrasi animasi GSAP sesuai timeline pada PRD (anggota muncul satu per satu lalu membentuk formasi). Ini akan membangun fitur utama website sejak awal sehingga section lain tinggal melengkapi pengalaman pengguna.
+
+
+
+Roadmap saya:
+
+v1 ✅ Initial Animation
+v2 ⬜ Formation Animation
+v3 ⬜ Division Timeline
+v4 ⬜ Idle Animation
+v5 ⬜ Hover Animation
+v6 ⬜ Click + Modal
+
+✅ useFormationAnimation.ts (full, siap copy-paste)
+✅ FormationCanvas.tsx (full)
+✅ Hero.tsx (full)
+✅ CommitteeCard.tsx (jika perlu)
