@@ -1,8 +1,14 @@
 "use client";
-
+import { useTheme } from "@/components/theme/ThemeProvider";
 import HomeGlow from "./HomeGlow";
 
 export default function HomeBackground() {
+  const { theme } = useTheme();
+
+  if (theme === "light") {
+    return <div className="absolute inset-0 bg-white" />;
+  }
+  
   return (
     <>
       {/* Base */}

@@ -1,5 +1,46 @@
 @import "tailwindcss";
 
+:root {
+  color-scheme: light;
+
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-soft: #f8fafc;
+
+  --text: #0f172a;
+  --text-muted: #64748b;
+
+  --border: rgb(226 232 240);
+
+  --accent: #10b981;
+  --accent-hover: #059669;
+}
+
+html.dark {
+  color-scheme: dark;
+
+  --bg: #000000;
+  --surface: rgba(255,255,255,.03);
+  --surface-soft: rgba(255,255,255,.05);
+
+  --text: #ffffff;
+  --text-muted: #94a3b8;
+
+  --border: rgba(255,255,255,.10);
+
+  --accent: #34d399;
+  --accent-hover: #10b981;
+}
+
+body{
+  overflow-x:hidden;
+  background:var(--bg);
+  color:var(--text);
+  transition:
+    background-color .35s ease,
+    color .35s ease;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -11,6 +52,62 @@ body {
 * {
   box-sizing: border-box;
 }
+
+
+
+/* ========================================
+   Custom Scrollbar
+======================================== */
+
+/* Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(16 185 129) transparent;
+}
+
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: rgb(2 6 23);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  transition: background-color .3s ease;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background-color: rgb(16 185 129 / .45);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(16 185 129 / .75);
+}
+
+html:not(.dark) ::-webkit-scrollbar-thumb {
+  background-color: rgb(148 163 184);
+}
+
+html:not(.dark) ::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(100 116 139);
+}
+
+
+
+
+/* =============================================== */
+
+
 
 @keyframes shooting-star {
   0% {

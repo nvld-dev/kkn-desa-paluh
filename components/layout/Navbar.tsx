@@ -4,6 +4,9 @@ import Link from "next/link";
 import { Menu, ChevronRight } from "lucide-react";
 import { useEffect, useState } from "react";
 
+import { useTheme } from "@/components/theme/useTheme";
+import ThemeToggle from "@/components/theme/ThemeToggle";
+
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import { cn } from "@/lib/cn";
@@ -22,6 +25,8 @@ interface NavbarProps {
 
 export default function Navbar({ hidden = false }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
+
+  const { theme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 30);
@@ -45,15 +50,27 @@ export default function Navbar({ hidden = false }: NavbarProps) {
       <Container className="pt-5">
         <div
           className={cn(
-            "flex h-16 items-center justify-between rounded-2xl border px-6 lg:px-8 transition-all duration-500",
-            scrolled
-              ? "border-white/10 bg-black/55 shadow-2xl shadow-black/30 backdrop-blur-2xl"
-              : "border-transparent bg-transparent",
+            "flex h-16 items-center justify-between rounded-2xl border px-6 transition-all duration-500 lg:px-8",
+
+            scrolled &&
+              (theme === "dark"
+                ? "border-[var(--border)] bg-black/55 shadow-2xl shadow-black/30 backdrop-blur-2xl"
+                : "border-slate-200 bg-white/80 shadow-lg shadow-slate-200/40 backdrop-blur-xl"),
+
+            !scrolled && "border-transparent bg-transparent",
           )}
         >
           {/* Logo */}
           <Link href="/" className="group flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/5 ring-1 ring-white/10 transition group-hover:bg-white/10">
+            <div
+              className={cn(
+                "flex h-9 w-9 items-center justify-center rounded-xl transition",
+
+                theme === "dark"
+                  ? "bg-white/5 ring-1 ring-white/10 group-hover:bg-white/10"
+                  : "bg-emerald-50 ring-1 ring-emerald-100 group-hover:bg-emerald-100",
+              )}
+            >
               <img
                 src="/images/logo/logo-kkn.png"
                 alt="Logo KKN"
@@ -62,9 +79,23 @@ export default function Navbar({ hidden = false }: NavbarProps) {
             </div>
 
             <div>
-              <h1 className="text-sm font-bold text-white">KKN Desa Paluh</h1>
+              <h1
+                className={cn(
+                  "text-sm font-bold transition-colors",
+                  theme === "dark" ? "text-white" : "text-slate-900",
+                )}
+              >
+                KKN Desa Paluh
+              </h1>
 
-              <p className="text-xs text-slate-400">Kuliah Kerja Nyata 2026</p>
+              <p
+                className={cn(
+                  "text-xs transition-colors",
+                  theme === "dark" ? "text-slate-400" : "text-slate-500",
+                )}
+              >
+                Kuliah Kerja Nyata 2026
+              </p>
             </div>
           </Link>
 
@@ -74,7 +105,13 @@ export default function Navbar({ hidden = false }: NavbarProps) {
               <Link
                 key={item.label}
                 href={item.href}
-                className="rounded-xl px-4 py-2 text-sm font-medium text-slate-300 transition-all duration-300 hover:bg-white/5 hover:text-white"
+                className={cn(
+                  "rounded-xl px-4 py-2 text-sm font-medium transition-all duration-300",
+
+                  theme === "dark"
+                    ? "text-slate-300 hover:bg-white/5 hover:text-white"
+                    : "text-slate-700 hover:bg-slate-100 hover:text-emerald-600",
+                )}
               >
                 {item.label}
               </Link>
@@ -83,13 +120,28 @@ export default function Navbar({ hidden = false }: NavbarProps) {
 
           {/* Right */}
           <div className="flex items-center gap-3">
-            <Button size="sm" className="hidden lg:inline-flex">
+            {/* <Button size="sm" className="hidden lg:inline-flex">
               Dokumentasi
               <ChevronRight className="ml-1 h-4 w-4" />
-            </Button>
+            </Button> */}
 
-            <button className="rounded-xl border border-white/10 bg-white/5 p-2 transition hover:bg-white/10 lg:hidden">
-              <Menu className="h-5 w-5 text-white" />
+            <ThemeToggle />
+
+            <button
+              className={cn(
+                "rounded-xl border p-2 transition lg:hidden",
+
+                theme === "dark"
+                  ? "border-white/10 bg-white/5 hover:bg-white/10"
+                  : "border-slate-200 bg-white hover:bg-slate-100",
+              )}
+            >
+              <Menu
+                className={cn(
+                  "h-5 w-5",
+                  theme === "dark" ? "text-white" : "text-slate-900",
+                )}
+              />
             </button>
           </div>
         </div>

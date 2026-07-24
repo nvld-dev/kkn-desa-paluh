@@ -1,10 +1,15 @@
 "use client";
-
+import { useTheme } from "@/components/theme/ThemeProvider";
 import HeroGlow from "./HeroGlow";
 import HeroParticles from "./HeroParticles";
 import HeroShootingStar from "./HeroShootingStar";
 
 export default function HeroBackground() {
+  const { theme } = useTheme();
+
+  if (theme === "light") {
+    return <div className="absolute inset-0 bg-white" />;
+  }
   return (
     <>
       {/* Base */}

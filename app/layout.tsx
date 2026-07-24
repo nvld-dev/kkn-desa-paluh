@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import ThemeProvider from "@/components/theme/ThemeProvider";
 
 export const metadata: Metadata = {
   title: {
@@ -10,6 +11,8 @@ export const metadata: Metadata = {
     "Website resmi KKN Desa Paluh yang menampilkan profil anggota, program kerja, dokumentasi kegiatan, dan informasi desa.",
 };
 
+
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -17,8 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id" suppressHydrationWarning>
-      <body className="text-white antialiased">{children}</body>
-      
+      <body>
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }

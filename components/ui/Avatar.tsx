@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/cn";
 
 const avatarVariants = cva(
-  "relative overflow-hidden rounded-full border-2 border-slate-700 bg-slate-800",
+  "relative overflow-hidden rounded-full border-2 transition-all duration-300 bg-[var(--avatar-bg)] border-[var(--avatar-border)]",
   {
     variants: {
       size: {

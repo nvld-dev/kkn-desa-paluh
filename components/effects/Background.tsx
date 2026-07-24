@@ -1,4 +1,19 @@
+"use client";
+
+import { useTheme } from "@/components/theme/ThemeProvider";
+
 export default function Background() {
+  const { theme } = useTheme();
+
+  if (theme === "light") {
+    return (
+      <div
+        aria-hidden
+        className="pointer-events-none fixed inset-0 -z-10 bg-white"
+      />
+    );
+  }
+
   return (
     <div
       aria-hidden

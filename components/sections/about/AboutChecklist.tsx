@@ -1,4 +1,7 @@
-// components/sections/about/AboutChecklist.tsx
+"use client";
+
+import { cn } from "@/lib/cn";
+import { useTheme } from "@/components/theme/useTheme";
 
 import type { AboutHighlight } from "@/data/about";
 import { CheckCircle2 } from "lucide-react";
@@ -8,21 +11,45 @@ interface AboutChecklistProps {
 }
 
 export default function AboutChecklist({ items }: AboutChecklistProps) {
+  const { theme } = useTheme();
+
   return (
     <div className="grid gap-3 sm:grid-cols-2">
       {items.map((item) => (
         <div
           key={item.id}
           data-about-check
-          className="group flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-3 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-emerald-400/40 hover:bg-white/[0.05]"
+          className={cn(
+            "group flex items-center gap-3 rounded-2xl p-3 transition-all duration-300 hover:-translate-y-1",
+
+            theme === "dark"
+              ? "border border-white/10 bg-white/[0.03] backdrop-blur-xl hover:border-emerald-400/40 hover:bg-white/[0.05]"
+              : "border border-slate-200 bg-white shadow-sm shadow-slate-200/40 hover:border-emerald-300 hover:shadow-md",
+          )}
         >
           {/* Icon */}
-          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-400 transition-colors duration-300 group-hover:bg-emerald-500/20">
+          <div
+            className={cn(
+              "flex h-9 w-9 shrink-0 items-center justify-center rounded-xl transition-all duration-300",
+
+              theme === "dark"
+                ? "bg-emerald-500/10 text-emerald-400 group-hover:bg-emerald-500/20"
+                : "bg-emerald-50 text-emerald-600 group-hover:bg-emerald-100",
+            )}
+          >
             <CheckCircle2 className="h-4.5 w-4.5" />
           </div>
 
           {/* Text */}
-          <p className="text-sm leading-6 text-slate-300 transition-colors duration-300 group-hover:text-white">
+          <p
+            className={cn(
+              "text-sm leading-6 transition-colors duration-300",
+
+              theme === "dark"
+                ? "text-slate-300 group-hover:text-white"
+                : "text-slate-700 group-hover:text-slate-900",
+            )}
+          >
             {item.text}
           </p>
         </div>

@@ -2,6 +2,7 @@
 
 import { Dispatch, SetStateAction, useRef, useState } from "react";
 
+import { useTheme } from "@/components/theme/useTheme";
 import HeroBackground from "@/components/effects/HeroBackground";
 import Spotlight from "@/components/hero/Spotlight";
 import FormationCanvas from "@/components/hero/FormationCanvas";
@@ -12,6 +13,7 @@ import Container from "@/components/ui/Container";
 import { members } from "@/data/members";
 import { useFormationAnimation } from "@/hooks/useFormationAnimation";
 import SectionTitle from "../ui/SectionTitle";
+import { cn } from "@/lib/cn";
 
 interface HeroProps {
   isIntro: boolean;
@@ -20,7 +22,7 @@ interface HeroProps {
 
 export default function Hero({ isIntro, setIsIntro }: HeroProps) {
   const heroRef = useRef<HTMLElement>(null);
-
+  const { theme } = useTheme();
   const badgeRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const descriptionRef = useRef<HTMLParagraphElement>(null);
@@ -46,14 +48,23 @@ export default function Hero({ isIntro, setIsIntro }: HeroProps) {
     <section
       ref={heroRef}
       id="hero"
-      className="relative isolate min-h-screen overflow-hidden "
+      className="relative isolate min-h-screen overflow-hidden"
     >
       <HeroBackground />
+
+      {/* {theme === "dark" && (
+        <Spotlight member={spotlightMember} visible={isIntro} />
+      )} */}
 
       <Spotlight member={spotlightMember} visible={isIntro} />
 
       <Container className="relative z-10 flex min-h-screen flex-col justify-center py-24">
-        <header className="relative z-10 mx-auto mt-20 mb-24 max-w-4xl px-4 text-center">
+        <header
+          className={cn(
+            "relative z-10 mx-auto mt-20 mb-24 max-w-4xl px-4 text-center transition-all duration-500",
+            theme === "light" && "pt-2",
+          )}
+        >
           {/* Logo */}
           <div
             ref={badgeRef}
@@ -62,13 +73,13 @@ export default function Hero({ isIntro, setIsIntro }: HeroProps) {
             <img
               src="/images/logo/logo-kkn.png"
               alt="Logo KKN"
-              className="h-24 w-24 object-contain drop-shadow-2xl"
+              className={cn(
+                "h-24 w-24 object-contain transition-all duration-500",
+                theme === "dark" ? "drop-shadow-2xl" : "drop-shadow-md",
+              )}
             />
 
-            <Badge
-              size="lg"
-              className="border-white/10 bg-white/5 backdrop-blur-xl"
-            >
+            <Badge variant="primary" size="lg">
               KKN UMRI 2026
             </Badge>
           </div>
@@ -76,7 +87,10 @@ export default function Hero({ isIntro, setIsIntro }: HeroProps) {
           {/* Title */}
           <h1
             ref={titleRef}
-            className="mt-5 text-5xl font-black tracking-tight text-white lg:text-7xl"
+            className={cn(
+              "mt-5 text-5xl font-black tracking-tight transition-colors lg:text-7xl",
+              theme === "dark" ? "text-white" : "text-slate-900",
+            )}
           >
             K11 DESA PALUH
           </h1>

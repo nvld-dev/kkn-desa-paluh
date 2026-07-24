@@ -1,3 +1,8 @@
+"use client";
+
+import { useTheme } from "@/components/theme/useTheme";
+import { cn } from "@/lib/cn";
+
 import Link from "next/link";
 import { Mail, MapPin, ArrowUpRight } from "lucide-react";
 
@@ -13,14 +18,32 @@ const navigation = [
 ];
 
 export default function Footer() {
+  const { theme } = useTheme();
+
   return (
-    <footer className="relative border-t border-white/10 bg-black">
+    <footer
+      className={cn(
+        "relative transition-colors duration-500",
+
+        theme === "dark"
+          ? "border-t border-white/10 bg-black"
+          : "border-t border-slate-200 bg-slate-950",
+      )}
+    >
       <Container>
         <div className="grid gap-14 py-20 md:grid-cols-[1.4fr_1fr_1fr]">
           {/* Brand */}
           <div>
             <div className="flex items-center gap-4">
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/5 ring-1 ring-white/10">
+              <div
+                className={cn(
+                  "flex h-14 w-14 items-center justify-center rounded-2xl transition-all duration-300",
+
+                  theme === "dark"
+                    ? "bg-white/5 ring-1 ring-white/10"
+                    : "bg-white shadow-lg ring-1 ring-white/20",
+                )}
+              >
                 <img
                   src="/images/logo/logo-kkn.png"
                   alt="Logo KKN"

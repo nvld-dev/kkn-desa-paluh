@@ -4,7 +4,7 @@
 
 import { useRef } from "react";
 
-
+import { useTheme } from "@/components/theme/useTheme";
 import SectionTitle from "@/components/ui/SectionTitle";
 import AboutImage from "./AboutImage";
 import AboutContent from "./AboutContent";
@@ -12,8 +12,10 @@ import AboutStats from "./AboutStats";
 
 import { aboutData } from "@/data/about";
 import useAboutAnimation from "@/hooks/useAboutAnimation";
+import { cn } from "@/lib/cn";
 
 export default function AboutSection() {
+  const { theme } = useTheme();
   const sectionRef = useRef<HTMLElement>(null);
 
   useAboutAnimation(sectionRef);
@@ -22,10 +24,14 @@ export default function AboutSection() {
     <section
       ref={sectionRef}
       id="about"
-      className="relative overflow-hidden bg-[radial-gradient(circle_at_center,transparent_0%,rgba(2,6,23,.45)_70%,rgba(2,6,23,.95)_100%)] py-16 lg:py-20"
-    >
-      
+      className={cn(
+        "relative overflow-hidden py-16 transition-colors duration-500 lg:py-20",
 
+        theme === "dark"
+          ? "bg-[radial-gradient(circle_at_center,transparent_0%,rgba(2,6,23,.45)_70%,rgba(2,6,23,.95)_100%)]"
+          : "bg-white",
+      )}
+    >
       <div className="relative mx-auto max-w-6xl px-6 lg:px-8">
         {/* Section Header */}
         <div data-about-header>

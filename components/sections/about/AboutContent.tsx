@@ -1,7 +1,9 @@
-// components/sections/about/AboutContent.tsx
+"use client";
+
+import { cn } from "@/lib/cn";
+import { useTheme } from "@/components/theme/useTheme";
 
 import type { AboutHighlight } from "@/data/about";
-
 import AboutChecklist from "./AboutChecklist";
 
 interface AboutContentProps {
@@ -15,15 +17,27 @@ export default function AboutContent({
   content,
   highlights,
 }: AboutContentProps) {
+  const { theme } = useTheme();
+
   return (
     <div data-about-content className="flex h-full flex-col justify-center">
       {/* Heading */}
-      <h3 className="text-2xl font-bold tracking-tight text-white lg:text-3xl">
+      <h3
+        className={cn(
+          "text-2xl font-bold tracking-tight transition-colors duration-300 lg:text-3xl",
+          theme === "dark" ? "text-white" : "text-slate-900",
+        )}
+      >
         {heading}
       </h3>
 
       {/* Description */}
-      <p className="mt-4 text-sm leading-7 text-slate-300 lg:text-base">
+      <p
+        className={cn(
+          "mt-4 text-sm leading-7 transition-colors duration-300 lg:text-base",
+          theme === "dark" ? "text-slate-300" : "text-slate-600",
+        )}
+      >
         {content}
       </p>
 

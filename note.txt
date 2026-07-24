@@ -219,11 +219,18 @@ public/
         └── 03.webp
 
 
-data/gallery.ts → definisi interface dan data album.
-GalleryCard.tsx → card untuk satu album.
-GalleryGrid.tsx → grid daftar album.
-GalleryHero.tsx → hero halaman /gallery.
-app/gallery/page.tsx → halaman daftar album.
-app/gallery/[album]/page.tsx → halaman detail album.
-GalleryLightbox.tsx → tampilan foto fullscreen.
-GalleryPreviewSection.tsx → preview album di homepage yang mengambil beberapa album pertama dan menyediakan tombol View All Gallery.
+
+
+Saya menyarankan kita mengerjakannya dalam urutan ini agar rapi dan minim bug:
+
+✅ Theme Provider
+✅ Theme Toggle di Navbar
+✅ globals.css (CSS Variables)
+✅ Background
+✅ Layout
+✅ Hero
+✅ Gallery
+✅ Artikel
+✅ Program Kerja
+✅ Footer
+✅ Komponen lainnya
