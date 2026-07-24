@@ -50,6 +50,8 @@ export function useFormationAnimation(
     () => {
       if (!containerRef.current) return;
 
+      const isAtTop = window.scrollY <= 5;
+
       let cancelled = false;
       let introFinished = false;
 
@@ -156,6 +158,13 @@ export function useFormationAnimation(
 
         finishIntro();
       };
+
+      // Jika halaman direfresh bukan di Hero,
+      // langsung tampilkan formasi akhir tanpa spotlight.
+      if (!isAtTop) {
+        skipIntro();
+        return;
+      }
       /* -------------------------------- */
       /* Reduced Motion                   */
       /* -------------------------------- */
@@ -467,7 +476,11 @@ export function useFormationAnimation(
         });
       };
 
-      runSequence();
+      if (isAtTop) {
+        runSequence();
+      } else {
+        skipIntro();
+      }
 
       return () => {
         cancelled = true;

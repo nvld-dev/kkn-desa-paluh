@@ -180,22 +180,50 @@ Dengan pembagian seperti ini, tanggung jawab setiap folder jelas:
 
 
 
+app/
+├── gallery/
+│   ├── page.tsx
+│   └── [album]/
+│       └── page.tsx
 
-Tahap 1
-data/about.ts
-Tahap 2
-AboutSection.tsx
-AboutContent.tsx
-AboutImage.tsx
-AboutChecklist.tsx
-AboutStatCard.tsx
-AboutStats.tsx
-Tahap 3
-hooks/useAboutAnimation.ts
-Tahap 4
-Integrasi ke app/page.tsx
-Tahap 5
-Review UI/UX
-Optimasi responsif
-Optimasi animasi GSAP
-Polishing agar visualnya setara dengan Heroh
+components/
+├── gallery/
+│   ├── GalleryHero.tsx
+│   ├── GalleryGrid.tsx
+│   ├── GalleryCard.tsx
+│   ├── GalleryAlbum.tsx
+│   ├── GalleryLightbox.tsx
+│   ├── GalleryFilter.tsx
+│   └── GalleryEmpty.tsx
+
+data/
+└── gallery.ts
+
+public/
+└── gallery/
+    ├── 2026-07-20-pembukaan/
+    │   ├── cover.webp
+    │   ├── 01.webp
+    │   ├── 02.webp
+    │   └── 03.webp
+    │
+    ├── 2026-07-22-gotong-royong/
+    │   ├── cover.webp
+    │   ├── 01.webp
+    │   └── 02.webp
+    │
+    └── 2026-07-24-umkm/
+        ├── cover.webp
+        ├── 01.webp
+        ├── 02.webp
+        └── 03.webp
+
+
+data/gallery.ts → definisi interface dan data album.
+GalleryCard.tsx → card untuk satu album.
+GalleryGrid.tsx → grid daftar album.
+GalleryHero.tsx → hero halaman /gallery.
+app/gallery/page.tsx → halaman daftar album.
+app/gallery/[album]/page.tsx → halaman detail album.
+GalleryLightbox.tsx → tampilan foto fullscreen.
+GalleryPreviewSection.tsx → preview album di homepage yang mengambil beberapa album pertama dan menyediakan tombol View All Gallery.

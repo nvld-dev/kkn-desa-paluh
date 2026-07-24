@@ -30,8 +30,7 @@ export default function HeroBackground() {
       <div className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(2,6,23,.45)_70%,rgba(2,6,23,.95)_100%)]" />
       <HeroGlow />
       <HeroParticles />
-        <HeroShootingStar />
-      
+      <HeroShootingStar />
     </>
   );
 }

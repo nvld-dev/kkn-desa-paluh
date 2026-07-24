@@ -21,6 +21,8 @@ export default function AboutBackground() {
 
         {/* Accent */}
         <div className="absolute top-[72%] left-1/2 h-[14rem] w-[14rem] -translate-x-1/2 rounded-full bg-emerald-800/15 blur-[100px]" />
+      
+        <div className="absolute bottom-[-24rem] left-1/2 h-[44rem] w-[44rem] -translate-x-1/2 rounded-full bg-emerald-950/55 blur-[200px]" />
       </div>
 
       {/* Vignette */}
