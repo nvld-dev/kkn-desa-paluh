@@ -4,7 +4,6 @@ import { useRef } from "react";
 
 import SectionTitle from "@/components/ui/SectionTitle";
 import SocialCard from "./SocialCard";
-import SocialBackground from "@/components/effects/SocialBackground";
 
 import { socialData } from "@/data/social";
 import useSocialAnimation from "@/hooks/useSocialAnimation";
@@ -20,9 +19,8 @@ export default function SocialSection() {
       id="social"
       className="relative overflow-hidden bg-[radial-gradient(circle_at_center,transparent_0%,rgba(2,6,23,.45)_70%,rgba(2,6,23,.95)_100%)] py-16 lg:py-20"
     >
-      <SocialBackground />
 
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="relative mx-auto max-w-6xl px-6 lg:px-8">
         {/* Section Header */}
         <div data-social-header>
           <SectionTitle

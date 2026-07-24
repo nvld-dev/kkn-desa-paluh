@@ -9,7 +9,6 @@ import SectionTitle from "@/components/ui/SectionTitle";
 import AboutImage from "./AboutImage";
 import AboutContent from "./AboutContent";
 import AboutStats from "./AboutStats";
-import AboutBackground from "@/components/effects/AboutBackground";
 
 import { aboutData } from "@/data/about";
 import useAboutAnimation from "@/hooks/useAboutAnimation";
@@ -25,10 +24,9 @@ export default function AboutSection() {
       id="about"
       className="relative overflow-hidden bg-[radial-gradient(circle_at_center,transparent_0%,rgba(2,6,23,.45)_70%,rgba(2,6,23,.95)_100%)] py-16 lg:py-20"
     >
-      <AboutBackground />
       
 
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="relative mx-auto max-w-6xl px-6 lg:px-8">
         {/* Section Header */}
         <div data-about-header>
           <SectionTitle

@@ -9,11 +9,11 @@ import Container from "@/components/ui/Container";
 import { cn } from "@/lib/cn";
 
 const navItems = [
-  { label: "Beranda", href: "#hero" },
-  { label: "Program", href: "#program" },
-  { label: "Galeri", href: "#gallery" },
-  { label: "Artikel", href: "#article" },
-  { label: "Tim", href: "#committee" },
+  { label: "Beranda", href: "/" },
+  { label: "Program", href: "/#program" },
+  { label: "Galeri", href: "/gallery" },
+  { label: "Artikel", href: "/#article" },
+  { label: "Tim", href: "/#committee" },
 ];
 
 interface NavbarProps {
@@ -45,7 +45,7 @@ export default function Navbar({ hidden = false }: NavbarProps) {
       <Container className="pt-5">
         <div
           className={cn(
-            "flex h-16 items-center justify-between rounded-2xl border px-6 transition-all duration-500",
+            "flex h-16 items-center justify-between rounded-2xl border px-6 lg:px-8 transition-all duration-500",
             scrolled
               ? "border-white/10 bg-black/55 shadow-2xl shadow-black/30 backdrop-blur-2xl"
               : "border-transparent bg-transparent",

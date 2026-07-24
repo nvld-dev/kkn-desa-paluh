@@ -1,8 +1,8 @@
 "use client";
 
-export default function AboutGlow() {
+export default function HomeGlow() {
   return (
-     <>
+    <>
       {/* Main Dark Glow */}
       <div className="absolute top-24 left-1/2 -z-10 h-[60px] w-[560px] -translate-x-1/2 rounded-full bg-black/60 blur-[180px]" />
 
