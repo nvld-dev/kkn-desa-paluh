@@ -44,7 +44,7 @@ export const aboutData: AboutData = {
     "Kami merupakan mahasiswa Universitas Muhammadiyah Riau yang melaksanakan Kuliah Kerja Nyata (KKN) Tahun 2026 di Desa Paluh. Bersama pemerintah desa dan masyarakat, kami berkomitmen menghadirkan program yang memberikan manfaat nyata melalui inovasi, kolaborasi, serta pemberdayaan masyarakat secara berkelanjutan.",
 
   image: {
-    src: "/images/about/about-kkn.jpg",
+    src: "/images/about/about-kkn3.png",
     alt: "Kelompok KKN 11 Desa Paluh",
   },
 

@@ -1,5 +1,8 @@
 "use client";
 
+import { cn } from "@/lib/cn";
+import { useTheme } from "@/components/theme/ThemeProvider";
+
 import { useState } from "react";
 
 import Image from "next/image";
@@ -17,6 +20,8 @@ interface GalleryAlbumProps {
 }
 
 export default function GalleryAlbum({ album }: GalleryAlbumProps) {
+  const { theme } = useTheme();
+
   const [currentIndex, setCurrentIndex] = useState<number | null>(null);
 
   const openLightbox = (index: number) => {
@@ -47,38 +52,94 @@ export default function GalleryAlbum({ album }: GalleryAlbumProps) {
         <Background />
 
         {/* Hero */}
-        <section className="relative overflow-hidden bg-[radial-gradient(circle_at_center,transparent_0%,rgba(2,6,23,.45)_70%,rgba(2,6,23,.95)_100%)] py-16 lg:py-20">
+        <section
+          className={cn(
+            "relative overflow-hidden py-16 transition-colors duration-500 lg:py-10",
+
+            theme === "dark"
+              ? "bg-[radial-gradient(circle_at_center,transparent_0%,rgba(2,6,23,.45)_70%,rgba(2,6,23,.95)_100%)]"
+              : "bg-white",
+          )}
+        >
           <div className="mx-auto max-w-6xl px-6 lg:px-8">
             <Link
               href="/gallery"
-              className="inline-flex items-center gap-2 text-sm text-slate-400 transition hover:text-emerald-400"
+              className={cn(
+                "inline-flex items-center gap-2 text-sm transition-colors duration-300",
+
+                theme === "dark"
+                  ? "text-slate-400 hover:text-emerald-400"
+                  : "text-slate-500 hover:text-emerald-600",
+              )}
             >
               <ArrowLeft className="h-4 w-4" />
               Back to Gallery
             </Link>
 
             <div className="mt-8">
-              <h1 className="text-4xl font-bold tracking-tight text-white lg:text-5xl">
+              <h1
+                className={cn(
+                  "text-4xl font-bold tracking-tight transition-colors duration-300 lg:text-5xl",
+
+                  theme === "dark" ? "text-white" : "text-slate-900",
+                )}
+              >
                 {album.title}
               </h1>
 
-              <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-400">
+              <p
+                className={cn(
+                  "mt-4 max-w-3xl text-lg leading-8 transition-colors duration-300",
+
+                  theme === "dark" ? "text-slate-400" : "text-slate-600",
+                )}
+              >
                 {album.description}
               </p>
 
-              <div className="mt-8 flex flex-wrap gap-6 text-sm text-slate-400">
+              <div
+                className={cn(
+                  "mt-8 flex flex-wrap gap-6 text-sm transition-colors duration-300",
+
+                  theme === "dark" ? "text-slate-400" : "text-slate-500",
+                )}
+              >
                 <div className="flex items-center gap-2">
-                  <CalendarDays className="h-4 w-4 text-emerald-400" />
+                  <CalendarDays
+                    className={cn(
+                      "h-4 w-4",
+
+                      theme === "dark"
+                        ? "text-emerald-400"
+                        : "text-emerald-600",
+                    )}
+                  />
                   {album.date}
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <MapPin className="h-4 w-4 text-emerald-400" />
+                  <MapPin
+                    className={cn(
+                      "h-4 w-4",
+
+                      theme === "dark"
+                        ? "text-emerald-400"
+                        : "text-emerald-600",
+                    )}
+                  />
                   {album.location}
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <Images className="h-4 w-4 text-emerald-400" />
+                  <Images
+                    className={cn(
+                      "h-4 w-4",
+
+                      theme === "dark"
+                        ? "text-emerald-400"
+                        : "text-emerald-600",
+                    )}
+                  />
                   {album.images.length} Photos
                 </div>
               </div>
@@ -87,22 +148,40 @@ export default function GalleryAlbum({ album }: GalleryAlbumProps) {
         </section>
 
         {/* Photos */}
-        <section className="relative overflow-hidden bg-[radial-gradient(circle_at_center,transparent_0%,rgba(2,6,23,.45)_70%,rgba(2,6,23,.95)_100%)] py-16 lg:py-20">
+        <section
+          className={cn(
+            "relative overflow-hidden py-16 transition-colors duration-500 lg:pb-20",
+
+            theme === "dark"
+              ? "bg-[radial-gradient(circle_at_center,transparent_0%,rgba(2,6,23,.45)_70%,rgba(2,6,23,.95)_100%)]"
+              : "bg-white",
+          )}
+        >
           <div className="mx-auto max-w-6xl px-6 lg:px-8">
-            <div className="columns-2 gap-5 md:columns-3 xl:columns-4">
+            <div className="columns-2 gap-2 md:columns-3 xl:columns-6">
               {album.images.map((image, index) => (
                 <button
                   key={image}
                   type="button"
                   onClick={() => openLightbox(index)}
-                  className="group mb-6 block w-full cursor-pointer break-inside-avoid overflow-hidden rounded-3xl"
+                  className={cn(
+                    "group mb-2 block w-full cursor-pointer break-inside-avoid overflow-hidden  transition-all duration-300",
+
+                    theme === "dark"
+                      ? ""
+                      : "border border-slate-200 bg-white shadow-sm hover:shadow-lg",
+                  )}
                 >
                   <Image
                     src={image}
                     alt={`${album.title} ${index + 1}`}
                     width={1200}
                     height={800}
-                    className="h-auto w-full object-contain transition duration-500 group-hover:scale-[1.03]"
+                    className={cn(
+                      "h-auto w-full object-contain transition duration-500 group-hover:scale-[1.03]",
+
+                      theme === "dark" ? "" : "rounded-3xl",
+                    )}
                   />
                 </button>
               ))}

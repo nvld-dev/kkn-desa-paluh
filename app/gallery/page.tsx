@@ -1,5 +1,8 @@
 "use client";
 
+import { cn } from "@/lib/cn";
+import { useTheme } from "@/components/theme/ThemeProvider";
+
 import { useMemo, useState } from "react";
 
 import Footer from "@/components/layout/Footer";
@@ -20,6 +23,8 @@ import {
 } from "@/data/gallery";
 
 export default function GalleryPage() {
+  const { theme } = useTheme();
+  
   const albums = getGalleryAlbums();
 
   const [active, setActive] = useState<GalleryCategory | "All">("All");
@@ -54,7 +59,15 @@ export default function GalleryPage() {
         totalCategories={totalCategories}
       />
 
-      <section className="relative overflow-hidden bg-[radial-gradient(circle_at_center,transparent_0%,rgba(2,6,23,.45)_70%,rgba(2,6,23,.95)_100%)] py-16 lg:py-20">
+      <section
+        className={cn(
+          "relative overflow-hidden py-16 transition-colors duration-500 lg:py-20",
+
+          theme === "dark"
+            ? "bg-[radial-gradient(circle_at_center,transparent_0%,rgba(2,6,23,.45)_70%,rgba(2,6,23,.95)_100%)]"
+            : "bg-white",
+        )}
+      >
         <div className="mx-auto max-w-6xl px-6 lg:px-8">
           <GalleryFilter active={active} onChange={setActive} />
           {hasAlbums ? (

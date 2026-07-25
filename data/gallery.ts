@@ -1,5 +1,5 @@
 export type GalleryCategory =
-  "Kegiatan" | "Pendidikan" | "UMKM" | "Sosial" | "Lingkungan" | "Lainnya";
+  "pre-kkn" | "Kegiatan" | "Pendidikan" | "UMKM" | "Sosial" | "Lingkungan" | "Lainnya";
 
 export interface GalleryAlbum {
   id: string;
@@ -18,6 +18,7 @@ export interface GalleryAlbum {
 }
 
 export const galleryCategories: GalleryCategory[] = [
+  "pre-kkn",
   "Kegiatan",
   "Pendidikan",
   "UMKM",
@@ -31,10 +32,10 @@ export const galleryAlbums: GalleryAlbum[] = [
     id: "1",
     slug: "2026-07-04-pra-kkn",
 
-    title: "Pra-KKN",
+    title: "H-23",
     description: "Rapat persiapan kkn",
 
-    category: "Kegiatan",
+    category: "pre-kkn",
 
     date: "04 Juli 2026",
     location: "GTC UMRI",
@@ -49,9 +50,38 @@ export const galleryAlbums: GalleryAlbum[] = [
       "/images/gallery/2026-07-04-pra-kkn/05.webp",
     ],
   },
+  {
+    id: "2",
+    slug: "2026-07-25-pra-kkn",
+
+    title: "H-2",
+    description: "hmmm... foto formal",
+
+    category: "pre-kkn",
+
+    date: "25 Juli 2026",
+    location: "GR UMRI",
+
+    cover: "/images/gallery/2026-07-25-pra-kkn/cover.webp",
+
+    images: [
+      "/images/gallery/2026-07-25-pra-kkn/1.webp",
+      "/images/gallery/2026-07-25-pra-kkn/2.webp",
+      "/images/gallery/2026-07-25-pra-kkn/3.webp",
+      "/images/gallery/2026-07-25-pra-kkn/4.webp",
+      "/images/gallery/2026-07-25-pra-kkn/5.webp",
+      "/images/gallery/2026-07-25-pra-kkn/6.webp",
+      "/images/gallery/2026-07-25-pra-kkn/7.webp",
+      "/images/gallery/2026-07-25-pra-kkn/8.webp",
+      "/images/gallery/2026-07-25-pra-kkn/9.webp",
+      "/images/gallery/2026-07-25-pra-kkn/10.webp",
+      "/images/gallery/2026-07-25-pra-kkn/11.webp",
+      "/images/gallery/2026-07-25-pra-kkn/12.webp",
+    ],
+  },
 
   // {
-  //   id: "2",
+  //   id: "3",
   //   slug: "2026-07-24-umkm",
 
   //   title: "Pendampingan UMKM",
@@ -73,7 +103,7 @@ export const galleryAlbums: GalleryAlbum[] = [
   // },
 
   // {
-  //   id: "3",
+  //   id: "4",
   //   slug: "2026-07-27-gotong-royong",
 
   //   title: "Gotong Royong",

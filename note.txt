@@ -234,3 +234,11 @@ Saya menyarankan kita mengerjakannya dalam urutan ini agar rapi dan minim bug:
 ✅ Program Kerja
 ✅ Footer
 ✅ Komponen lainnya
+
+GalleryHero ⭐
+GalleryFilter
+GalleryCard
+GalleryGrid
+GalleryLightbox
+GalleryAlbum
+GalleryComingSoon

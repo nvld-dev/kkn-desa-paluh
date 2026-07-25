@@ -11,7 +11,7 @@ interface AboutImageProps {
 export default function AboutImage({ image }: AboutImageProps) {
   const { theme } = useTheme();
   return (
-    <div data-about-image className="group relative mx-auto w-[85%] lg:w-[80%]">
+    <div data-about-image className="group relative mx-auto w-[95%] lg:w-[100%]">
       {/* Glow */}
       {theme === "dark" && (
         <div className="absolute -inset-3 rounded-[28px] bg-emerald-500/10 opacity-50 blur-3xl transition-opacity duration-500 group-hover:opacity-80" />
@@ -27,7 +27,7 @@ export default function AboutImage({ image }: AboutImageProps) {
             : "border border-slate-200 bg-white shadow-xl shadow-slate-200/40",
         )}
       >
-        <div className="relative aspect-[3/4] overflow-hidden rounded-3xl">
+        <div className="relative aspect-[3/2] overflow-hidden rounded-3xl">
           <Image
             src={image.src}
             alt={image.alt}
