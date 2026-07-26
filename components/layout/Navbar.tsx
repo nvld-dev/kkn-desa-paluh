@@ -136,6 +136,8 @@ export default function Navbar({ hidden = false }: NavbarProps) {
           </div>
         </div>
 
+        
+        {/* setMobileOpen */}
         <div
           className={cn(
             "mt-3 overflow-hidden rounded-2xl border transition-all duration-300 lg:hidden",
