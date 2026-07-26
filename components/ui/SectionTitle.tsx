@@ -38,7 +38,7 @@ export default function SectionTitle({
 
       <h2
         className={cn(
-          "text-4xl font-black tracking-tight transition-colors duration-300 md:text-6xl",
+          "mt-6 text-4xl font-bold transition-colors duration-300 md:text-6xl",
 
           theme === "dark" ? "text-white" : "text-slate-900",
         )}

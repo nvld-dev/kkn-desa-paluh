@@ -28,20 +28,13 @@ export default function AboutStatCard({
   return (
     <div
       data-about-stat
-      className={cn(
-        "group relative overflow-hidden rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1",
-
-        theme === "dark"
-          ? "border border-white/10 bg-white/[0.03] backdrop-blur-xl hover:border-emerald-400/40 hover:bg-white/[0.05]"
-          : "border border-slate-200 bg-white shadow-lg shadow-slate-200/40 hover:border-emerald-300 hover:shadow-xl",
-      )}
-    >
+      className="flex relative overflow-hidden flex-col items-center rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1"    >
       {/* Glow */}
       {theme === "dark" && (
         <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
       )}
 
-      <div className="relative flex flex-col gap-4">
+      <div className="relative flex flex-col items-center gap-2">
         {/* Icon */}
         <div
           className={cn(
@@ -56,7 +49,7 @@ export default function AboutStatCard({
         </div>
 
         {/* Number */}
-        <div>
+        <div className="text-center">
           <h3
             className={cn(
               "text-3xl font-bold tracking-tight transition-colors duration-300 lg:text-4xl",
@@ -82,3 +75,16 @@ export default function AboutStatCard({
     </div>
   );
 }
+
+
+
+{/* <div
+      data-about-stat
+      className={cn(
+        "flex relative overflow-hidden flex-col items-center rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1",
+
+        theme === "dark"
+          ? "border border-white/10 bg-white/[0.03] backdrop-blur-xl hover:border-emerald-400/40 hover:bg-white/[0.05]"
+          : "border border-slate-200 bg-white shadow-lg shadow-slate-200/40 hover:border-emerald-300 hover:shadow-xl",
+      )}
+    > */}

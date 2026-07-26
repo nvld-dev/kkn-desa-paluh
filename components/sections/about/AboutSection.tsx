@@ -13,6 +13,7 @@ import AboutStats from "./AboutStats";
 import { aboutData } from "@/data/about";
 import useAboutAnimation from "@/hooks/useAboutAnimation";
 import { cn } from "@/lib/cn";
+import AboutChecklist from "./AboutChecklist";
 
 export default function AboutSection() {
   const { theme } = useTheme();
@@ -59,9 +60,9 @@ export default function AboutSection() {
           </div>
         </div>
 
-        {/* Statistics */}
-        <div className="mt-14 lg:mt-16">
-          <AboutStats stats={aboutData.stats} />
+        {/* Highlights */}
+        <div className="mt-14  lg:mt-16">
+          <AboutChecklist items={aboutData.highlights} />
         </div>
       </div>
     </section>

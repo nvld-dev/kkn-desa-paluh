@@ -10,8 +10,7 @@ interface AboutStatsProps {
 
 export default function AboutStats({ stats }: AboutStatsProps) {
   return (
-    <div className="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-5">
-    
+    <div className="grid grid-cols-2 mx-auto max-w-4x1 gap-4 lg:grid-cols-3 lg:gap-6">
       {stats.map(({ id, ...stat }) => (
         <AboutStatCard key={id} {...stat} />
       ))}
@@ -19,5 +18,4 @@ export default function AboutStats({ stats }: AboutStatsProps) {
   );
 }
 
-
-// <div className="grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-5">
+// <div className="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-5">

@@ -14,13 +14,13 @@ export default function AboutChecklist({ items }: AboutChecklistProps) {
   const { theme } = useTheme();
 
   return (
-    <div className="grid gap-3 sm:grid-cols-2">
+    <div className="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-5">
       {items.map((item) => (
         <div
           key={item.id}
           data-about-check
           className={cn(
-            "group flex items-center gap-3 rounded-2xl p-3 transition-all duration-300 hover:-translate-y-1",
+            "group flex flex-col items-center gap-3 text-center rounded-2xl p-3 transition-all duration-300 hover:-translate-y-1",
 
             theme === "dark"
               ? "border border-white/10 bg-white/[0.03] backdrop-blur-xl hover:border-emerald-400/40 hover:bg-white/[0.05]"

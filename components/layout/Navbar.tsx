@@ -13,7 +13,7 @@ import { cn } from "@/lib/cn";
 
 const navItems = [
   { label: "Beranda", href: "/" },
-  { label: "Program", href: "/#program" },
+  { label: "Program", href: "/program" },
   { label: "Galeri", href: "/gallery" },
   { label: "Artikel", href: "/#article" },
   { label: "Tim", href: "/#committee" },
@@ -63,13 +63,8 @@ export default function Navbar({ hidden = false }: NavbarProps) {
           {/* Logo */}
           <Link href="/" className="group flex items-center gap-3">
             <div
-              className={cn(
-                "flex h-9 w-9 items-center justify-center rounded-xl transition",
-
-                theme === "dark"
-                  ? "bg-white/5 ring-1 ring-white/10 group-hover:bg-white/10"
-                  : "bg-emerald-50 ring-1 ring-emerald-100 group-hover:bg-emerald-100",
-              )}
+              className=
+                "flex h-9 w-9 items-center justify-center rounded-xl transition"
             >
               <img
                 src="/images/logo/logo-kkn.png"

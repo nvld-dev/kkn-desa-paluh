@@ -3,8 +3,9 @@
 import { cn } from "@/lib/cn";
 import { useTheme } from "@/components/theme/useTheme";
 
-import type { AboutHighlight } from "@/data/about";
+import { aboutData, type AboutHighlight } from "@/data/about";
 import AboutChecklist from "./AboutChecklist";
+import AboutStats from "./AboutStats";
 
 interface AboutContentProps {
   heading: string;
@@ -41,9 +42,9 @@ export default function AboutContent({
         {content}
       </p>
 
-      {/* Highlights */}
+      {/* Statistics */}
       <div className="mt-6">
-        <AboutChecklist items={highlights} />
+        <AboutStats stats={aboutData.stats} />
       </div>
     </div>
   );

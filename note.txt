@@ -172,73 +172,68 @@ Dengan pembagian seperti ini, tanggung jawab setiap folder jelas:
 
 
 
-
-
-
-
-
-
-
-
 app/
-├── gallery/
-│   ├── page.tsx
-│   └── [album]/
-│       └── page.tsx
+└── program/
+    └── page.tsx
 
 components/
-├── gallery/
-│   ├── GalleryHero.tsx
-│   ├── GalleryGrid.tsx
-│   ├── GalleryCard.tsx
-│   ├── GalleryAlbum.tsx
-│   ├── GalleryLightbox.tsx
-│   ├── GalleryFilter.tsx
-│   └── GalleryEmpty.tsx
+└── program/
+    ├── ProgramHero.tsx
+    ├── ProgramFilter.tsx
+    ├── ProgramList.tsx
+    └── ProgramCTA.tsx
+    components/
+
+└── program/
+
+    ├── ProgramDetailHero.tsx
+
+    ├── ProgramOverview.tsx
+
+    ├── ProgramInfo.tsx
+
+    ├── ProgramGallery.tsx
+
+    ├── ProgramResults.tsx
+
+    ├── ProgramMembers.tsx
+
+    ├── RelatedPrograms.tsx
+
+    └── ProgramCTA.tsx
+
+
+✅ app/program/[slug]/page.tsx
+✅ ProgramDetailHero.tsx
+✅ ProgramOverview.tsx
+✅ ProgramInfo.tsx 
+✅ ProgramGallery.tsx
+✅ ProgramResults.tsx
+✅ ProgramMembers.tsx
+✅ RelatedPrograms.tsx
 
 data/
-└── gallery.ts
+└── programs.ts
+
 
 public/
-└── gallery/
-    ├── 2026-07-20-pembukaan/
-    │   ├── cover.webp
-    │   ├── 01.webp
-    │   ├── 02.webp
-    │   └── 03.webp
-    │
-    ├── 2026-07-22-gotong-royong/
-    │   ├── cover.webp
-    │   ├── 01.webp
-    │   └── 02.webp
-    │
-    └── 2026-07-24-umkm/
-        ├── cover.webp
-        ├── 01.webp
-        ├── 02.webp
-        └── 03.webp
-
-
-
-
-Saya menyarankan kita mengerjakannya dalam urutan ini agar rapi dan minim bug:
-
-✅ Theme Provider
-✅ Theme Toggle di Navbar
-✅ globals.css (CSS Variables)
-✅ Background
-✅ Layout
-✅ Hero
-✅ Gallery
-✅ Artikel
-✅ Program Kerja
-✅ Footer
-✅ Komponen lainnya
-
-GalleryHero ⭐
-GalleryFilter
-GalleryCard
-GalleryGrid
-GalleryLightbox
-GalleryAlbum
-GalleryComingSoon
+└── images/
+    └── programs/
+        ├── digitalisasi-umkm/
+        │   ├── cover.jpg
+        │   ├── 1.jpg
+        │   ├── 2.jpg
+        │   ├── 3.jpg
+        │   └── 4.jpg
+        │
+        ├── penyuluhan-lingkungan/
+        │   ├── cover.jpg
+        │   ├── 1.jpg
+        │   ├── 2.jpg
+        │   └── 3.jpg
+        │
+        └── pelatihan-canva/
+            ├── cover.jpg
+            ├── 1.jpg
+            ├── 2.jpg
+            └── 3.jpg

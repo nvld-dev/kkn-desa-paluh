@@ -70,7 +70,7 @@ export default function GalleryHero({
           {/* Description */}
           <p
             className={cn(
-              "mx-auto mt-6 max-w-2xl text-lg leading-8 transition-colors duration-300",
+              "mx-auto mt-6 max-w-2xl text-lg leading-6 transition-colors duration-300",
 
               theme === "dark" ? "text-slate-400" : "text-slate-600",
             )}
@@ -80,7 +80,7 @@ export default function GalleryHero({
           </p>
 
           {hasAlbums && (
-            <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3">
+            <div className="mt-12 grid grid-cols-2 gap-4 lg:grid-cols-3">
               <div
                 className={cn(
                   "rounded-2xl p-6 transition-all duration-300",
