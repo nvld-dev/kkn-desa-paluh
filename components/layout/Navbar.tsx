@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { Menu, ChevronRight } from "lucide-react";
+import { Menu, X, ChevronRight } from "lucide-react";
 import { useEffect, useState } from "react";
+
 
 import { useTheme } from "@/components/theme/useTheme";
 import ThemeToggle from "@/components/theme/ThemeToggle";
@@ -25,6 +26,7 @@ interface NavbarProps {
 
 export default function Navbar({ hidden = false }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const { theme } = useTheme();
 
@@ -62,10 +64,7 @@ export default function Navbar({ hidden = false }: NavbarProps) {
         >
           {/* Logo */}
           <Link href="/" className="group flex items-center gap-3">
-            <div
-              className=
-                "flex h-9 w-9 items-center justify-center rounded-xl transition"
-            >
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl transition">
               <img
                 src="/images/logo/logo-kkn.png"
                 alt="Logo KKN"
@@ -115,14 +114,10 @@ export default function Navbar({ hidden = false }: NavbarProps) {
 
           {/* Right */}
           <div className="flex items-center gap-3">
-            {/* <Button size="sm" className="hidden lg:inline-flex">
-              Dokumentasi
-              <ChevronRight className="ml-1 h-4 w-4" />
-            </Button> */}
-
             <ThemeToggle />
 
             <button
+              onClick={() => setMobileOpen(!mobileOpen)}
               className={cn(
                 "rounded-xl border p-2 transition lg:hidden",
 
@@ -139,6 +134,39 @@ export default function Navbar({ hidden = false }: NavbarProps) {
               />
             </button>
           </div>
+        </div>
+
+        <div
+          className={cn(
+            "mt-3 overflow-hidden rounded-2xl border transition-all duration-300 lg:hidden",
+
+            theme === "dark"
+              ? "border-white/10 bg-black/70 backdrop-blur-xl"
+              : "border-slate-200 bg-white/95 backdrop-blur-xl",
+
+            mobileOpen
+              ? "max-h-[400px] opacity-100"
+              : "max-h-0 border-transparent opacity-0",
+          )}
+        >
+          <nav className="flex flex-col p-3">
+            {navItems.map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                onClick={() => setMobileOpen(false)}
+                className={cn(
+                  "rounded-xl px-4 py-3 text-sm font-medium transition",
+
+                  theme === "dark"
+                    ? "text-slate-300 hover:bg-white/5 hover:text-white"
+                    : "text-slate-700 hover:bg-slate-100",
+                )}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
         </div>
       </Container>
     </header>
