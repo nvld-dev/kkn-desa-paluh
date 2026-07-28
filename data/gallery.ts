@@ -80,27 +80,30 @@ export const galleryAlbums: GalleryAlbum[] = [
     ],
   },
 
-  // {
-  //   id: "3",
-  //   slug: "2026-07-24-umkm",
+  {
+    id: "3",
+    slug: "2026-07-27-pelepasan",
 
-  //   title: "Pendampingan UMKM",
-  //   description:
-  //     "Pendampingan digitalisasi dan promosi produk UMKM Desa Paluh.",
+    title: "Pelepasan KKN",
+    description:
+      "Acara pelepasan secara resmi.",
 
-  //   category: "UMKM",
+    category: "Lainnya",
 
-  //   date: "24 Juli 2026",
-  //   location: "Desa Paluh",
+    date: "27 Juli 2026",
+    location: "UMRI",
 
-  //   cover: "/gallery/2026-07-24-umkm/cover.webp",
+    cover: "/gallery/2026-07-27-pelepasan/cover.webp",
 
-  //   images: [
-  //     "/gallery/2026-07-24-umkm/01.webp",
-  //     "/gallery/2026-07-24-umkm/02.webp",
-  //     "/gallery/2026-07-24-umkm/03.webp",
-  //   ],
-  // },
+    images: [
+      "/gallery/2026-07-27-pelepasan/1.webp",
+      "/gallery/2026-07-27-pelepasan/2.webp",
+      "/gallery/2026-07-27-pelepasan/3.webp",
+      "/gallery/2026-07-27-pelepasan/4.webp",
+      "/gallery/2026-07-27-pelepasan/5.webp",
+      "/gallery/2026-07-27-pelepasan/6.webp",
+    ],
+  },
 
   // {
   //   id: "4",
