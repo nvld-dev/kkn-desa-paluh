@@ -45,39 +45,92 @@ export default function FormationCanvas({
   }, [memberMap]);
 
   return (
-    <div className="relative mx-auto h-[1400px] w-full overflow-visible">
-
-      {items.map(({ member, position }) => (
-        <div
-          key={member.id}
-          className="absolute"
-          style={{
-            // 144px = half of CommitteeCard's fixed w-72 (288px) width,
-            // baked in here since this wrapper can't use a centering
-            // transform (see note on data-card's fixed-position spotlight).
-            left: `calc(50% + ${position.x - 144 + 60}px)`,
-            top: `${position.y}px`,
-          }}
-          data-node
-          data-member-id={member.id}
-          data-division={member.division}
-          data-x={position.x}
-          data-y={position.y}
-        >
-          {/* Animated Layer */}
+    <>
+      {/* ===========================
+          Desktop (tetap)
+      ============================ */}
+      <div className="relative mx-auto hidden h-[1400px] w-full overflow-visible lg:block">
+        {items.map(({ member, position }) => (
           <div
-            data-card
-            className="origin-center will-change-[opacity,transform]"
-            style={{ opacity: 0 }}
+            key={member.id}
+            className="absolute"
+            style={{
+              left: `calc(50% + ${position.x - 144 + 60}px)`,
+              top: `${position.y}px`,
+            }}
+            data-node
+            data-member-id={member.id}
+            data-division={member.division}
+            data-x={position.x}
+            data-y={position.y}
           >
+            <div
+              data-card
+              className="origin-center will-change-[opacity,transform]"
+              style={{ opacity: 0 }}
+            >
+              <CommitteeCard
+                member={member}
+                active={selectedId === member.id}
+                onClick={() => onSelect?.(member.id)}
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* ===========================
+          Mobile
+      ============================ */}
+      <div className="space-y-5 lg:hidden">
+        {/* Ketua */}
+        <div className="flex justify-center">
+          {items.slice(0, 1).map(({ member }) => (
             <CommitteeCard
+              key={member.id}
               member={member}
               active={selectedId === member.id}
               onClick={() => onSelect?.(member.id)}
             />
-          </div>
+          ))}
         </div>
-      ))}
-    </div>
+
+        {/* Sekretaris */}
+        <div className="grid grid-cols-2 justify-items-center gap-4">
+          {items.slice(1, 3).map(({ member }) => (
+            <CommitteeCard
+              key={member.id}
+              member={member}
+              active={selectedId === member.id}
+              onClick={() => onSelect?.(member.id)}
+            />
+          ))}
+        </div>
+
+        {/* Bendahara - Humas - Kominfo */}
+        <div className="grid grid-cols-2 justify-items-center gap-4">
+          {items.slice(3, 7).map(({ member }) => (
+            <CommitteeCard
+              key={member.id}
+              member={member}
+              active={selectedId === member.id}
+              onClick={() => onSelect?.(member.id)}
+            />
+          ))}
+        </div>
+
+        {/* Kominfo - Acara */}
+        <div className="grid grid-cols-2 justify-items-center gap-4">
+          {items.slice(7).map(({ member }) => (
+            <CommitteeCard
+              key={member.id}
+              member={member}
+              active={selectedId === member.id}
+              onClick={() => onSelect?.(member.id)}
+            />
+          ))}
+        </div>
+      </div>
+    </>
   );
 }
