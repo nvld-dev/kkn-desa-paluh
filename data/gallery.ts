@@ -93,15 +93,15 @@ export const galleryAlbums: GalleryAlbum[] = [
     date: "27 Juli 2026",
     location: "UMRI",
 
-    cover: "/gallery/2026-07-27-pelepasan/cover.webp",
+    cover: "/images/gallery/2026-07-27-pelepasan/cover.webp",
 
     images: [
-      "/gallery/2026-07-27-pelepasan/1.webp",
-      "/gallery/2026-07-27-pelepasan/2.webp",
-      "/gallery/2026-07-27-pelepasan/3.webp",
-      "/gallery/2026-07-27-pelepasan/4.webp",
-      "/gallery/2026-07-27-pelepasan/5.webp",
-      "/gallery/2026-07-27-pelepasan/6.webp",
+      "/images/gallery/2026-07-27-pelepasan/1.webp",
+      "/images/gallery/2026-07-27-pelepasan/2.webp",
+      "/images/gallery/2026-07-27-pelepasan/3.webp",
+      "/images/gallery/2026-07-27-pelepasan/4.webp",
+      "/images/gallery/2026-07-27-pelepasan/5.webp",
+      "/images/gallery/2026-07-27-pelepasan/6.webp",
     ],
   },
 

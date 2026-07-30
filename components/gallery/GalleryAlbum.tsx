@@ -180,7 +180,7 @@ export default function GalleryAlbum({ album }: GalleryAlbumProps) {
                     className={cn(
                       "h-auto w-full object-contain transition duration-500 group-hover:scale-[1.03]",
 
-                      theme === "dark" ? "" : "rounded-3xl",
+                      theme === "dark" ? "" : "",
                     )}
                   />
                 </button>
